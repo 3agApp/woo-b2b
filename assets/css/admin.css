@@ -44,3 +44,388 @@
 .wb2b-admin .subsubsub {
     margin-bottom: 6px;
 }
+
+/* ============================================================
+   License + Updates page
+   ============================================================ */
+.wb2b-license-wrap {
+    --wb2b-primary: #6366f1;
+    --wb2b-primary-hover: #4f46e5;
+    --wb2b-primary-light: #eef2ff;
+    --wb2b-success: #10b981;
+    --wb2b-success-light: #d1fae5;
+    --wb2b-warning: #f59e0b;
+    --wb2b-warning-light: #fef3c7;
+    --wb2b-danger: #ef4444;
+    --wb2b-danger-light: #fee2e2;
+    --wb2b-gray-50: #f9fafb;
+    --wb2b-gray-100: #f3f4f6;
+    --wb2b-gray-200: #e5e7eb;
+    --wb2b-gray-300: #d1d5db;
+    --wb2b-gray-400: #9ca3af;
+    --wb2b-gray-500: #6b7280;
+    --wb2b-gray-600: #4b5563;
+    --wb2b-gray-700: #374151;
+    --wb2b-gray-800: #1f2937;
+    --wb2b-gray-900: #111827;
+    --wb2b-radius: 8px;
+    --wb2b-radius-lg: 12px;
+    --wb2b-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    max-width: 820px;
+    margin: 20px 20px 20px 0;
+}
+
+.wb2b-license-wrap * {
+    box-sizing: border-box;
+}
+
+.wb2b-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--wb2b-gray-200);
+}
+
+.wb2b-header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--wb2b-gray-900);
+    margin: 0 0 4px 0;
+    padding: 0;
+}
+
+.wb2b-subtitle {
+    font-size: 14px;
+    color: var(--wb2b-gray-500);
+    margin: 0;
+}
+
+.wb2b-section {
+    margin-bottom: 24px;
+}
+
+.wb2b-card {
+    background: #fff;
+    border-radius: var(--wb2b-radius-lg);
+    box-shadow: var(--wb2b-shadow);
+    overflow: hidden;
+}
+
+.wb2b-card-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--wb2b-gray-100);
+}
+
+.wb2b-card-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wb2b-gray-800);
+    margin: 0;
+}
+
+.wb2b-card-header h2 .dashicons {
+    color: var(--wb2b-primary);
+}
+
+.wb2b-card-body {
+    padding: 24px;
+}
+
+/* Status card */
+.wb2b-license-card {
+    border: 2px solid var(--wb2b-gray-200);
+    box-shadow: none;
+}
+
+.wb2b-license-card.wb2b-license-active {
+    border-color: var(--wb2b-success);
+}
+
+.wb2b-license-card.wb2b-license-warning {
+    border-color: var(--wb2b-warning);
+}
+
+.wb2b-license-card.wb2b-license-expired {
+    border-color: var(--wb2b-danger);
+}
+
+.wb2b-license-status-display {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.wb2b-license-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--wb2b-gray-100);
+    color: var(--wb2b-gray-400);
+}
+
+.wb2b-license-icon .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.wb2b-license-active .wb2b-license-icon {
+    background: var(--wb2b-success-light);
+    color: var(--wb2b-success);
+}
+
+.wb2b-license-warning .wb2b-license-icon {
+    background: var(--wb2b-warning-light);
+    color: var(--wb2b-warning);
+}
+
+.wb2b-license-expired .wb2b-license-icon {
+    background: var(--wb2b-danger-light);
+    color: var(--wb2b-danger);
+}
+
+.wb2b-license-info h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--wb2b-gray-800);
+    margin: 0 0 4px 0;
+}
+
+.wb2b-license-info p {
+    font-size: 14px;
+    color: var(--wb2b-gray-500);
+    margin: 0;
+}
+
+.wb2b-license-product {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wb2b-license-package {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--wb2b-primary-light);
+    color: var(--wb2b-primary);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.wb2b-license-details {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--wb2b-gray-100);
+}
+
+.wb2b-license-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.wb2b-license-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wb2b-detail-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wb2b-gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wb2b-detail-value {
+    font-size: 14px;
+    color: var(--wb2b-gray-700);
+}
+
+.wb2b-days-remaining { color: var(--wb2b-success); }
+.wb2b-expired { color: var(--wb2b-danger); }
+.wb2b-lifetime { color: var(--wb2b-primary); font-weight: 500; }
+
+.wb2b-license-key-display {
+    margin-bottom: 20px;
+}
+
+.wb2b-license-key-masked {
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: var(--wb2b-gray-50);
+    border-radius: var(--wb2b-radius);
+    color: var(--wb2b-gray-600);
+    letter-spacing: 1px;
+}
+
+.wb2b-license-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.wb2b-activation-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 12px 16px;
+    background: var(--wb2b-warning-light);
+    color: var(--wb2b-warning);
+    border-radius: var(--wb2b-radius);
+    font-size: 14px;
+}
+
+.wb2b-license-help {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--wb2b-gray-100);
+}
+
+.wb2b-license-help p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--wb2b-gray-500);
+}
+
+.wb2b-license-help a { color: var(--wb2b-primary); }
+
+/* Form + inputs */
+.wb2b-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wb2b-gray-700);
+    margin-bottom: 8px;
+}
+
+.wb2b-required { color: var(--wb2b-danger); }
+
+.wb2b-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--wb2b-gray-300);
+    border-radius: var(--wb2b-radius);
+    background: #fff;
+}
+
+.wb2b-input:focus {
+    outline: none;
+    border-color: var(--wb2b-primary);
+    box-shadow: 0 0 0 3px var(--wb2b-primary-light);
+}
+
+.wb2b-input-lg { padding: 12px 16px; font-size: 15px; }
+.wb2b-input-mono { font-family: 'SF Mono', Monaco, 'Courier New', monospace; letter-spacing: 0.5px; }
+
+.wb2b-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.wb2b-input-group .wb2b-input { flex: 1; }
+
+.wb2b-help-text {
+    font-size: 13px;
+    color: var(--wb2b-gray-500);
+    margin: 8px 0 0 0;
+}
+
+.wb2b-muted { color: var(--wb2b-gray-500); }
+
+/* Buttons */
+.wb2b-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--wb2b-radius);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.wb2b-btn .dashicons { font-size: 18px; width: 18px; height: 18px; }
+.wb2b-btn-primary { background: var(--wb2b-primary); color: #fff; }
+.wb2b-btn-primary:hover, .wb2b-btn-primary:focus { background: var(--wb2b-primary-hover); color: #fff; }
+.wb2b-btn-secondary { background: var(--wb2b-gray-100); color: var(--wb2b-gray-700); }
+.wb2b-btn-secondary:hover, .wb2b-btn-secondary:focus { background: var(--wb2b-gray-200); color: var(--wb2b-gray-800); }
+.wb2b-btn-danger { background: var(--wb2b-danger); color: #fff; }
+.wb2b-btn-danger:hover, .wb2b-btn-danger:focus { background: #dc2626; color: #fff; }
+.wb2b-btn-lg { padding: 12px 24px; font-size: 15px; }
+.wb2b-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Updates */
+.wb2b-update-status { display: flex; flex-direction: column; gap: 18px; }
+.wb2b-version-info { display: flex; flex-direction: column; gap: 10px; }
+.wb2b-version-row { display: flex; align-items: center; gap: 12px; }
+.wb2b-version-label { color: var(--wb2b-gray-500); min-width: 140px; }
+.wb2b-version-value { font-weight: 600; color: var(--wb2b-gray-800); display: flex; align-items: center; gap: 10px; }
+.wb2b-version-new { color: var(--wb2b-primary); }
+
+.wb2b-update-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--wb2b-primary-light);
+    color: var(--wb2b-primary);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.wb2b-update-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--wb2b-gray-200);
+}
+
+/* Spinner + toast */
+.wb2b-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: wb2b-spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes wb2b-spin { to { transform: rotate(360deg); } }
+
+.wb2b-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 14px 22px;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
+    font-size: 14px;
+    z-index: 100001;
+    background: #1f2937;
+}
+
+.wb2b-toast-success { background: #10b981; }
+.wb2b-toast-error { background: #ef4444; }

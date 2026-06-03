@@ -29,6 +29,22 @@ define('WB2B_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WB2B_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('WB2B_PRODUCT_SLUG', 'woo-b2b');
 
+/**
+ * Get the clean site domain for license validation.
+ *
+ * @return string
+ */
+function wb2b_get_domain() {
+    $parsed = wp_parse_url(site_url());
+    $domain = isset($parsed['host']) ? $parsed['host'] : '';
+
+    // Remove www prefix and any port.
+    $domain = preg_replace('/^www\./', '', $domain);
+    $domain = preg_replace('/:\d+$/', '', $domain);
+
+    return $domain;
+}
+
 // Autoloader: WB2B_Foo_Bar => includes/class-foo-bar.php
 spl_autoload_register(function ($class) {
     $prefix = 'WB2B_';
@@ -65,6 +81,8 @@ final class Woo_B2B {
     public $auth;
     public $admin;
     public $ajax;
+    public $license;
+    public $updater;
 
     /**
      * Get instance
@@ -111,6 +129,8 @@ final class Woo_B2B {
         $this->access   = new WB2B_Access();
         $this->auth     = new WB2B_Auth();
         $this->ajax     = new WB2B_Ajax();
+        $this->license  = new WB2B_License();
+        $this->updater  = new WB2B_Updater();
 
         if (is_admin()) {
             $this->admin = new WB2B_Admin();

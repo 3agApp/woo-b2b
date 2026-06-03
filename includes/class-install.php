@@ -53,6 +53,14 @@ class WB2B_Install {
         // Grandfather existing accounts so the gate doesn't lock them out.
         self::backfill_existing_users();
 
+        // Schedule license + update checks.
+        if (!wp_next_scheduled('wb2b_license_check')) {
+            wp_schedule_event(time(), 'daily', 'wb2b_license_check');
+        }
+        if (!wp_next_scheduled('wb2b_update_check')) {
+            wp_schedule_event(time(), 'twicedaily', 'wb2b_update_check');
+        }
+
         flush_rewrite_rules();
     }
 
@@ -80,6 +88,8 @@ class WB2B_Install {
      * Deactivation.
      */
     public static function deactivate() {
+        wp_clear_scheduled_hook('wb2b_license_check');
+        wp_clear_scheduled_hook('wb2b_update_check');
         flush_rewrite_rules();
     }
 

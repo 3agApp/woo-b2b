@@ -25,11 +25,20 @@ $options = [
     'wb2b_admin_email',
     'wb2b_min_password',
     'wb2b_db_version',
+    'wb2b_license_key',
+    'wb2b_license_status',
+    'wb2b_license_data',
+    'wb2b_license_last_check',
 ];
 
 foreach ($options as $option) {
     delete_option($option);
 }
+
+// Clear scheduled hooks and cached update data.
+wp_clear_scheduled_hook('wb2b_license_check');
+wp_clear_scheduled_hook('wb2b_update_check');
+delete_transient('wb2b_update_data');
 
 // Trash the auth page if it still exists.
 $auth_page_id = (int) get_option('wb2b_auth_page_id', 0);

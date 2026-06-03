@@ -67,6 +67,15 @@ class WB2B_Admin {
             self::MENU_SLUG . '-settings',
             [$this, 'render_settings_page']
         );
+
+        add_submenu_page(
+            self::MENU_SLUG,
+            __('License', 'woo-b2b'),
+            __('License', 'woo-b2b'),
+            'manage_woocommerce',
+            self::MENU_SLUG . '-license',
+            [$this, 'render_license_page']
+        );
     }
 
     /**
@@ -85,10 +94,12 @@ class WB2B_Admin {
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('wb2b_admin_nonce'),
             'strings'  => [
-                'confirm_approve' => __('Approve this customer?', 'woo-b2b'),
-                'reject_prompt'   => __('Reason for rejection (optional, included in the email):', 'woo-b2b'),
-                'working'         => __('Working…', 'woo-b2b'),
-                'error'           => __('Something went wrong. Please try again.', 'woo-b2b'),
+                'confirm_approve'    => __('Approve this customer?', 'woo-b2b'),
+                'reject_prompt'      => __('Reason for rejection (optional, included in the email):', 'woo-b2b'),
+                'working'            => __('Working…', 'woo-b2b'),
+                'error'              => __('Something went wrong. Please try again.', 'woo-b2b'),
+                'confirm_deactivate' => __('Deactivate the license on this domain?', 'woo-b2b'),
+                'confirm_install'    => __('Download and install the update now? The plugin will briefly deactivate.', 'woo-b2b'),
             ],
         ]);
     }
@@ -198,6 +209,18 @@ class WB2B_Admin {
         $all_countries = (function_exists('WC') && WC()->countries) ? WC()->countries->get_countries() : [];
 
         include WB2B_PLUGIN_DIR . 'includes/views/admin-settings.php';
+    }
+
+    /**
+     * Render the License page.
+     */
+    public function render_license_page() {
+        $license_key    = get_option('wb2b_license_key', '');
+        $license_status = get_option('wb2b_license_status', '');
+        $license_data   = WB2B()->license->get_data();
+        $last_check     = get_option('wb2b_license_last_check');
+
+        include WB2B_PLUGIN_DIR . 'includes/views/license.php';
     }
 
     /* ----- Users list ----- */

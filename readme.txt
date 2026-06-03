@@ -28,6 +28,8 @@ approved business customers can see products, prices, or place orders.
   when their registration is received, approved, or rejected.
 * **WooCommerce-native data** — address fields are stored on the customer so checkout and the
   My Account area are pre-filled after approval.
+* **License + automatic updates** — activate your 3AG license under **B2B Customers → License**
+  to receive automatic updates delivered from GitHub Releases.
 
 This plugin handles access control and approval only. It does not change pricing or tax logic.
 
@@ -59,4 +61,5 @@ The interface is English for now. All strings are translation-ready (text domain
 
 = 1.0.0 =
 * Initial release: catalog lock, login/registration page, manual approval workflow,
-  email notifications, and admin Users-list integration.
+  email notifications, admin Users-list integration, 3AG license activation, and
+  automatic updates from GitHub Releases.
