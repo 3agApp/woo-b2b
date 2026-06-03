@@ -47,7 +47,7 @@ $mask_key = function ($key) {
 };
 ?>
 
-<div class="wrap wb2b-license-wrap">
+<div class="wrap wb2b-ui wb2b-license-wrap">
     <div class="wb2b-header">
         <div class="wb2b-header-left">
             <h1><?php esc_html_e('License', 'woo-b2b'); ?></h1>

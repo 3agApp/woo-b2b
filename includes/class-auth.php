@@ -36,8 +36,10 @@ class WB2B_Auth {
     public function enqueue_assets() {
         $auth_id = self::auth_page_id();
         if ($auth_id && is_page($auth_id)) {
-            wp_enqueue_style('wb2b', WB2B_PLUGIN_URL . 'assets/css/b2b.css', [], WB2B_VERSION);
-            wp_enqueue_script('wb2b', WB2B_PLUGIN_URL . 'assets/js/b2b.js', [], WB2B_VERSION, true);
+            $css = WB2B_PLUGIN_DIR . 'assets/css/b2b.css';
+            $js  = WB2B_PLUGIN_DIR . 'assets/js/b2b.js';
+            wp_enqueue_style('wb2b', WB2B_PLUGIN_URL . 'assets/css/b2b.css', [], file_exists($css) ? filemtime($css) : WB2B_VERSION);
+            wp_enqueue_script('wb2b', WB2B_PLUGIN_URL . 'assets/js/b2b.js', [], file_exists($js) ? filemtime($js) : WB2B_VERSION, true);
         }
     }
 

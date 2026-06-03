@@ -87,8 +87,11 @@ class WB2B_Admin {
             return;
         }
 
-        wp_enqueue_style('wb2b-admin', WB2B_PLUGIN_URL . 'assets/css/admin.css', [], WB2B_VERSION);
-        wp_enqueue_script('wb2b-admin', WB2B_PLUGIN_URL . 'assets/js/admin.js', ['jquery'], WB2B_VERSION, true);
+        $css = WB2B_PLUGIN_DIR . 'assets/css/admin.css';
+        $js  = WB2B_PLUGIN_DIR . 'assets/js/admin.js';
+
+        wp_enqueue_style('wb2b-admin', WB2B_PLUGIN_URL . 'assets/css/admin.css', [], file_exists($css) ? filemtime($css) : WB2B_VERSION);
+        wp_enqueue_script('wb2b-admin', WB2B_PLUGIN_URL . 'assets/js/admin.js', ['jquery'], file_exists($js) ? filemtime($js) : WB2B_VERSION, true);
 
         wp_localize_script('wb2b-admin', 'wb2b_admin', [
             'ajax_url' => admin_url('admin-ajax.php'),
