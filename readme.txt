@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ They are stored as private attachments and linked from the customer row on the a
 The interface is English for now. All strings are translation-ready (text domain `woo-b2b`).
 
 == Changelog ==
+
+= 1.0.1 =
+* Version bump for the current release.
 
 = 1.0.0 =
 * Initial release: catalog lock, login/registration page, manual approval workflow,
