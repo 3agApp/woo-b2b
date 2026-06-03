@@ -1,0 +1,178 @@
+<?php
+/**
+ * Access Class
+ *
+ * Locks the front end behind login + approval and blocks unapproved logins.
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class WB2B_Access {
+
+    public function __construct() {
+        add_action('template_redirect', [$this, 'maybe_redirect'], 1);
+        add_filter('authenticate', [$this, 'block_unapproved_login'], 30, 3);
+        add_filter('wp_robots', [$this, 'noindex_when_locked']);
+    }
+
+    /**
+     * Auth page ID.
+     *
+     * @return int
+     */
+    public static function get_auth_page_id() {
+        return (int) get_option('wb2b_auth_page_id', 0);
+    }
+
+    /**
+     * Whether the current request should bypass the gate.
+     *
+     * @return bool
+     */
+    protected function is_bypassed() {
+        if (!get_option('wb2b_enabled', true)) {
+            return true;
+        }
+
+        if (is_admin() || wp_doing_ajax() || (defined('DOING_CRON') && DOING_CRON)) {
+            return true;
+        }
+
+        if (defined('REST_REQUEST') && REST_REQUEST) {
+            return true;
+        }
+
+        if (is_feed() || is_robots() || (function_exists('is_favicon') && is_favicon())) {
+            return true;
+        }
+
+        // Admins / shop managers are never gated.
+        if (current_user_can('manage_woocommerce')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Whether the currently queried page is always allowed (auth page + allowlist).
+     *
+     * @return bool
+     */
+    protected function is_allowed_page() {
+        $object_id = get_queried_object_id();
+
+        if (!$object_id) {
+            return false;
+        }
+
+        $auth_page_id = self::get_auth_page_id();
+        if ($auth_page_id && $object_id === $auth_page_id) {
+            return true;
+        }
+
+        $allowed = (array) get_option('wb2b_allowed_pages', []);
+        $allowed = array_map('intval', $allowed);
+
+        return in_array((int) $object_id, $allowed, true);
+    }
+
+    /**
+     * Redirect guests / unapproved users to the auth page.
+     */
+    public function maybe_redirect() {
+        if ($this->is_bypassed()) {
+            return;
+        }
+
+        // Approved, logged-in users may continue.
+        if (is_user_logged_in() && WB2B_Customer::has_access(get_current_user_id())) {
+            return;
+        }
+
+        // The auth page and any allowlisted page stay public.
+        if ($this->is_allowed_page()) {
+            return;
+        }
+
+        $auth_page_id = self::get_auth_page_id();
+        if (!$auth_page_id) {
+            // No auth page configured — fail open rather than trap the visitor.
+            return;
+        }
+
+        $target = get_permalink($auth_page_id);
+        if (!$target) {
+            // Auth page is missing/trashed — fail open rather than loop.
+            return;
+        }
+
+        // Preserve where the visitor wanted to go for post-login bounce-back.
+        $current = home_url(add_query_arg([]));
+        $target  = add_query_arg('redirect_to', rawurlencode($current), $target);
+
+        wp_safe_redirect($target);
+        exit;
+    }
+
+    /**
+     * Block login for users who are not approved.
+     *
+     * @param WP_User|WP_Error|null $user
+     * @param string                $username
+     * @param string                $password
+     * @return WP_User|WP_Error|null
+     */
+    public function block_unapproved_login($user, $username, $password) {
+        // Let earlier errors (bad credentials, empty fields) flow through.
+        if (!$user instanceof WP_User) {
+            return $user;
+        }
+
+        // Privileged users are always allowed.
+        if (user_can($user, 'manage_woocommerce')) {
+            return $user;
+        }
+
+        $status = WB2B_Customer::get_status($user->ID);
+
+        if ($status === WB2B_Customer::STATUS_PENDING) {
+            return new WP_Error(
+                'wb2b_pending',
+                __('Your account is awaiting approval. We will email you once it has been reviewed.', 'woo-b2b')
+            );
+        }
+
+        if ($status === WB2B_Customer::STATUS_REJECTED) {
+            return new WP_Error(
+                'wb2b_rejected',
+                __('Your registration was not approved. Please contact us for more information.', 'woo-b2b')
+            );
+        }
+
+        return $user;
+    }
+
+    /**
+     * Add noindex when the visitor is being gated, so locked URLs are not indexed.
+     *
+     * @param array $robots
+     * @return array
+     */
+    public function noindex_when_locked($robots) {
+        if ($this->is_bypassed()) {
+            return $robots;
+        }
+
+        if (is_user_logged_in() && WB2B_Customer::has_access(get_current_user_id())) {
+            return $robots;
+        }
+
+        $robots['noindex']  = true;
+        $robots['nofollow'] = true;
+
+        return $robots;
+    }
+}

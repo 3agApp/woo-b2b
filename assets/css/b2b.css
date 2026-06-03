@@ -1,0 +1,270 @@
+/**
+ * Woo B2B — front-end auth page styles.
+ * Theme-neutral; scoped under .wb2b-auth.
+ */
+
+.wb2b-auth {
+    --wb2b-primary: #2b6cb0;
+    --wb2b-primary-hover: #245a96;
+    --wb2b-border: #d9dee5;
+    --wb2b-bg: #fff;
+    --wb2b-muted: #6b7280;
+    --wb2b-error: #b42318;
+    --wb2b-error-bg: #fdecea;
+    --wb2b-success: #1c7c4a;
+    --wb2b-success-bg: #e7f5ee;
+    max-width: 1080px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.wb2b-auth *,
+.wb2b-auth *::before,
+.wb2b-auth *::after {
+    box-sizing: border-box;
+}
+
+/* Layout */
+.wb2b-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .wb2b-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.wb2b-card {
+    background: var(--wb2b-bg);
+    border: 1px solid var(--wb2b-border);
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.wb2b-card__title {
+    margin: 0 0 6px;
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+
+.wb2b-card__intro {
+    margin: 0 0 18px;
+    color: var(--wb2b-muted);
+}
+
+/* Notices */
+.wb2b-notice {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 0 0 20px;
+    border: 1px solid transparent;
+}
+
+.wb2b-notice ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.wb2b-notice--error {
+    background: var(--wb2b-error-bg);
+    border-color: var(--wb2b-error);
+    color: var(--wb2b-error);
+}
+
+.wb2b-notice--success {
+    background: var(--wb2b-success-bg);
+    border-color: var(--wb2b-success);
+    color: var(--wb2b-success);
+}
+
+/* Fields */
+.wb2b-fieldset {
+    border: 0;
+    border-top: 1px solid var(--wb2b-border);
+    margin: 18px 0 0;
+    padding: 18px 0 0;
+}
+
+.wb2b-fieldset:first-of-type {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.wb2b-fieldset legend {
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.wb2b-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0;
+}
+
+.wb2b-field {
+    margin: 0 0 14px;
+    flex: 1 1 100%;
+    min-width: 0;
+}
+
+.wb2b-field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.wb2b-col-3 { flex: 1 1 calc(25% - 14px); }
+.wb2b-col-4 { flex: 1 1 calc(33.333% - 14px); }
+.wb2b-col-6 { flex: 1 1 calc(50% - 14px); }
+.wb2b-col-8 { flex: 1 1 calc(66.666% - 14px); }
+.wb2b-col-12 { flex: 1 1 100%; }
+
+@media (max-width: 560px) {
+    .wb2b-col-3,
+    .wb2b-col-4,
+    .wb2b-col-6,
+    .wb2b-col-8 {
+        flex: 1 1 100%;
+    }
+}
+
+.wb2b-input,
+.wb2b-field input[type="text"],
+.wb2b-field input[type="email"],
+.wb2b-field input[type="password"],
+.wb2b-field input[type="file"],
+.wb2b-field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--wb2b-border);
+    border-radius: 7px;
+    font-size: 0.95rem;
+    background: #fff;
+    line-height: 1.4;
+}
+
+.wb2b-input:focus,
+.wb2b-field input:focus,
+.wb2b-field select:focus {
+    outline: none;
+    border-color: var(--wb2b-primary);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+.wb2b-help {
+    display: block;
+    color: var(--wb2b-muted);
+    font-size: 0.82rem;
+    margin-top: 4px;
+}
+
+.wb2b-field--inline {
+    display: flex;
+    align-items: center;
+}
+
+.wb2b-checkbox {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.wb2b-checkbox input {
+    margin-top: 3px;
+}
+
+.wb2b-privacy {
+    margin: 18px 0;
+    padding: 14px;
+    border: 1px solid var(--wb2b-border);
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.wb2b-required-note {
+    color: var(--wb2b-muted);
+    font-size: 0.85rem;
+}
+
+/* Buttons */
+.wb2b-btn {
+    display: inline-block;
+    background: var(--wb2b-primary);
+    color: #fff;
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.wb2b-btn:hover {
+    background: var(--wb2b-primary-hover);
+    color: #fff;
+}
+
+.wb2b-btn--lg {
+    padding: 13px 28px;
+    font-size: 1rem;
+}
+
+.wb2b-submit {
+    margin: 18px 0 0;
+}
+
+.wb2b-card--register .wb2b-submit {
+    text-align: right;
+}
+
+/* Login extras */
+.wb2b-login-recover {
+    margin: 4px 0 12px;
+    font-size: 0.88rem;
+}
+
+.wb2b-advantages {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--wb2b-border);
+}
+
+.wb2b-advantages__title {
+    font-size: 1rem;
+    margin: 0 0 8px;
+}
+
+.wb2b-advantages ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--wb2b-muted);
+}
+
+/* Honeypot — visually hidden but reachable by bots. */
+.wb2b-hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.wb2b-auth--note {
+    border: 1px solid var(--wb2b-border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    max-width: 640px;
+    margin: 0 auto;
+}
