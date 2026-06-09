@@ -103,6 +103,17 @@ class WB2B_Admin {
                 'error'              => __('Something went wrong. Please try again.', 'woo-b2b'),
                 'confirm_deactivate' => __('Deactivate the license on this domain?', 'woo-b2b'),
                 'confirm_install'    => __('Download and install the update now? The plugin will briefly deactivate.', 'woo-b2b'),
+                // Modal chrome + action button labels.
+                'cancel'             => __('Cancel', 'woo-b2b'),
+                'confirm'            => __('Confirm', 'woo-b2b'),
+                'approve_title'      => __('Approve customer', 'woo-b2b'),
+                'approve'            => __('Approve', 'woo-b2b'),
+                'reject_title'       => __('Reject customer', 'woo-b2b'),
+                'reject'             => __('Reject', 'woo-b2b'),
+                'deactivate_title'   => __('Deactivate license', 'woo-b2b'),
+                'deactivate'         => __('Deactivate', 'woo-b2b'),
+                'update_title'       => __('Install update', 'woo-b2b'),
+                'update'             => __('Update now', 'woo-b2b'),
             ],
         ]);
     }
@@ -121,6 +132,7 @@ class WB2B_Admin {
         register_setting('wb2b_settings', 'wb2b_allowed_pages', ['type' => 'array', 'sanitize_callback' => [$this, 'sanitize_id_array'], 'default' => []]);
         register_setting('wb2b_settings', 'wb2b_countries', ['type' => 'array', 'sanitize_callback' => [$this, 'sanitize_countries'], 'default' => ['CH', 'LI']]);
         register_setting('wb2b_settings', 'wb2b_doc_mimes', ['type' => 'array', 'sanitize_callback' => [$this, 'sanitize_mimes'], 'default' => ['pdf', 'jpg', 'jpeg', 'png']]);
+        register_setting('wb2b_settings', 'wb2b_auth_ui_style', ['type' => 'string', 'sanitize_callback' => [$this, 'sanitize_ui_style'], 'default' => 'theme']);
     }
 
     /* ----- Sanitizers ----- */
@@ -159,6 +171,12 @@ class WB2B_Admin {
         $value   = is_array($value) ? array_map('strtolower', $value) : [];
         $out     = array_values(array_intersect($allowed, $value));
         return !empty($out) ? $out : $allowed;
+    }
+
+    public function sanitize_ui_style($value) {
+        $allowed = ['theme', 'default'];
+        $value   = sanitize_text_field($value);
+        return in_array($value, $allowed, true) ? $value : 'theme';
     }
 
     /* ----- Pages ----- */
@@ -208,6 +226,7 @@ class WB2B_Admin {
         $doc_max_mb        = (int) get_option('wb2b_doc_max_mb', 10);
         $min_password      = (int) get_option('wb2b_min_password', 8);
         $admin_email       = get_option('wb2b_admin_email', get_option('admin_email'));
+        $auth_ui_style     = get_option('wb2b_auth_ui_style', 'theme');
 
         $all_countries = (function_exists('WC') && WC()->countries) ? WC()->countries->get_countries() : [];
 

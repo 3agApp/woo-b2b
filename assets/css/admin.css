@@ -340,6 +340,8 @@
 
 .wb2b-input-lg { padding: 12px 16px; font-size: 15px; }
 .wb2b-input-mono { font-family: 'SF Mono', Monaco, 'Courier New', monospace; letter-spacing: 0.5px; }
+.wb2b-input-sm { max-width: 120px; }
+.wb2b-input-wide { max-width: 420px; }
 
 .wb2b-input-group {
     display: flex;
@@ -408,6 +410,8 @@
     padding-top: 12px;
     border-top: 1px solid var(--wb2b-gray-200);
 }
+
+.wb2b-update-status .wb2b-help-text { margin-top: 16px; }
 
 /* Spinner + toast */
 .wb2b-spinner {
@@ -722,4 +726,77 @@ select.wb2b-select[multiple] {
     border-radius: 10px;
     font-size: 11px;
     font-weight: 600;
+}
+
+/* ============================================================
+   Modal dialog — replaces native confirm()/prompt()
+   ============================================================ */
+.wb2b-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(17, 24, 39, 0.55);
+    z-index: 100010;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.wb2b-modal-overlay.is-open { opacity: 1; }
+
+.wb2b-modal {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: var(--wb2b-radius-lg);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+    overflow: hidden;
+    transform: translateY(8px);
+    transition: transform 0.15s ease;
+}
+
+.wb2b-modal-overlay.is-open .wb2b-modal { transform: translateY(0); }
+
+.wb2b-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 24px 0;
+}
+
+.wb2b-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--wb2b-primary-light);
+    color: var(--wb2b-primary);
+}
+
+.wb2b-modal-icon .dashicons { font-size: 22px; width: 22px; height: 22px; }
+.wb2b-modal--danger .wb2b-modal-icon { background: var(--wb2b-danger-light); color: var(--wb2b-danger); }
+
+.wb2b-modal-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wb2b-gray-900);
+}
+
+.wb2b-modal-body { padding: 14px 24px 0; }
+.wb2b-modal-message { margin: 0; font-size: 14px; line-height: 1.5; color: var(--wb2b-gray-600); }
+.wb2b-modal-body > .wb2b-label { margin-top: 16px; }
+.wb2b-modal-body > .wb2b-label:first-child { margin-top: 0; }
+.wb2b-modal-body textarea.wb2b-input { min-height: 88px; resize: vertical; font-family: inherit; line-height: 1.5; }
+
+.wb2b-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 22px 24px;
 }

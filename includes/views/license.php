@@ -339,7 +339,7 @@ $mask_key = function ($key) {
                         <?php endif; ?>
                     </div>
 
-                    <p class="wb2b-help-text wb2b-muted" style="margin-top:15px;">
+                    <p class="wb2b-help-text wb2b-muted">
                         <span class="dashicons dashicons-external"></span>
                         <?php
                         printf(

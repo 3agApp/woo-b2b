@@ -61,24 +61,138 @@
             });
     }
 
+    // Promise-based modal — replaces native confirm()/prompt().
+    // Resolves: confirm → true/false; prompt → entered string/null (cancel).
+    function openModal(opts) {
+        var s = wb2b_admin.strings;
+        var isPrompt = !!opts.prompt;
+
+        return new Promise(function (resolve) {
+            var $overlay = $('<div class="wb2b-modal-overlay"></div>');
+            var $modal = $('<div class="wb2b-modal" role="dialog" aria-modal="true" aria-labelledby="wb2b-modal-title"></div>');
+            if (opts.danger) {
+                $modal.addClass('wb2b-modal--danger');
+            }
+
+            var icon = opts.icon || (opts.danger ? 'dashicons-warning' : 'dashicons-info-outline');
+            var $header = $('<div class="wb2b-modal-header"></div>')
+                .append('<span class="wb2b-modal-icon"><span class="dashicons ' + icon + '"></span></span>')
+                .append($('<h2 class="wb2b-modal-title" id="wb2b-modal-title"></h2>').text(opts.title || ''));
+
+            var $body = $('<div class="wb2b-modal-body"></div>');
+            if (opts.message) {
+                $body.append($('<p class="wb2b-modal-message"></p>').text(opts.message));
+            }
+            var $field = null;
+            if (isPrompt) {
+                if (opts.label) {
+                    $body.append($('<label class="wb2b-label" for="wb2b-modal-field"></label>').text(opts.label));
+                }
+                $field = $('<textarea id="wb2b-modal-field" class="wb2b-input" rows="3"></textarea>')
+                    .attr('placeholder', opts.placeholder || '');
+                $body.append($field);
+            }
+
+            var $cancel = $('<button type="button" class="wb2b-btn wb2b-btn-secondary"></button>').text(opts.cancelLabel || s.cancel);
+            var $confirm = $('<button type="button" class="wb2b-btn"></button>')
+                .addClass(opts.danger ? 'wb2b-btn-danger' : 'wb2b-btn-primary')
+                .text(opts.confirmLabel || s.confirm);
+            var $footer = $('<div class="wb2b-modal-footer"></div>').append($cancel).append($confirm);
+
+            $modal.append($header, $body, $footer);
+            $overlay.append($modal).appendTo('body');
+
+            var lastFocus = document.activeElement;
+            $overlay[0].offsetWidth; // force reflow so the open transition runs
+            $overlay.addClass('is-open');
+            ($field || $confirm).trigger('focus');
+
+            function close(result) {
+                $(document).off('keydown.wb2bModal');
+                $overlay.removeClass('is-open');
+                setTimeout(function () { $overlay.remove(); }, 150);
+                if (lastFocus && lastFocus.focus) {
+                    lastFocus.focus();
+                }
+                resolve(result);
+            }
+
+            $confirm.on('click', function () {
+                close(isPrompt ? ($field.val() || '') : true);
+            });
+            $cancel.on('click', function () {
+                close(isPrompt ? null : false);
+            });
+            $overlay.on('mousedown', function (e) {
+                if (e.target === $overlay[0]) {
+                    close(isPrompt ? null : false);
+                }
+            });
+            $(document).on('keydown.wb2bModal', function (e) {
+                if (e.key === 'Escape') {
+                    close(isPrompt ? null : false);
+                } else if (e.key === 'Enter' && !isPrompt) {
+                    e.preventDefault();
+                    close(true);
+                } else if (e.key === 'Tab') {
+                    var $f = $overlay.find('button, textarea, input, a[href]').filter(':visible');
+                    if (!$f.length) {
+                        return;
+                    }
+                    var first = $f[0];
+                    var last = $f[$f.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            });
+        });
+    }
+
+    function wb2bConfirm(opts) {
+        return openModal(opts);
+    }
+
+    function wb2bPrompt(opts) {
+        return openModal($.extend({}, opts, { prompt: true }));
+    }
+
     $(function () {
         $(document).on('click', '.wb2b-approve', function () {
             var id = $(this).data('user-id');
-            if (!window.confirm(wb2b_admin.strings.confirm_approve)) {
-                return;
-            }
-            var $row = $('#wb2b-user-' + id);
-            handle('wb2b_approve', { user_id: id }, $row, $row.find('.wb2b-action-status'));
+            wb2bConfirm({
+                title: wb2b_admin.strings.approve_title,
+                message: wb2b_admin.strings.confirm_approve,
+                confirmLabel: wb2b_admin.strings.approve,
+                icon: 'dashicons-yes-alt'
+            }).then(function (ok) {
+                if (!ok) {
+                    return;
+                }
+                var $row = $('#wb2b-user-' + id);
+                handle('wb2b_approve', { user_id: id }, $row, $row.find('.wb2b-action-status'));
+            });
         });
 
         $(document).on('click', '.wb2b-reject', function () {
             var id = $(this).data('user-id');
-            var reason = window.prompt(wb2b_admin.strings.reject_prompt, '');
-            if (reason === null) {
-                return;
-            }
-            var $row = $('#wb2b-user-' + id);
-            handle('wb2b_reject', { user_id: id, reason: reason }, $row, $row.find('.wb2b-action-status'));
+            wb2bPrompt({
+                title: wb2b_admin.strings.reject_title,
+                label: wb2b_admin.strings.reject_prompt,
+                confirmLabel: wb2b_admin.strings.reject,
+                danger: true,
+                icon: 'dashicons-dismiss'
+            }).then(function (reason) {
+                if (reason === null) {
+                    return;
+                }
+                var $row = $('#wb2b-user-' + id);
+                handle('wb2b_reject', { user_id: id, reason: reason }, $row, $row.find('.wb2b-action-status'));
+            });
         });
 
         // License management.
@@ -97,10 +211,17 @@
         });
 
         $('#wb2b-deactivate-license').on('click', function () {
-            if (!window.confirm(wb2b_admin.strings.confirm_deactivate)) {
-                return;
-            }
-            action($(this), 'wb2b_deactivate_license');
+            var $btn = $(this);
+            wb2bConfirm({
+                title: wb2b_admin.strings.deactivate_title,
+                message: wb2b_admin.strings.confirm_deactivate,
+                confirmLabel: wb2b_admin.strings.deactivate,
+                danger: true
+            }).then(function (ok) {
+                if (ok) {
+                    action($btn, 'wb2b_deactivate_license');
+                }
+            });
         });
 
         $('#wb2b-check-license').on('click', function () {
@@ -113,10 +234,17 @@
         });
 
         $('#wb2b-install-update').on('click', function () {
-            if (!window.confirm(wb2b_admin.strings.confirm_install)) {
-                return;
-            }
-            action($(this), 'wb2b_install_update');
+            var $btn = $(this);
+            wb2bConfirm({
+                title: wb2b_admin.strings.update_title,
+                message: wb2b_admin.strings.confirm_install,
+                confirmLabel: wb2b_admin.strings.update,
+                icon: 'dashicons-download'
+            }).then(function (ok) {
+                if (ok) {
+                    action($btn, 'wb2b_install_update');
+                }
+            });
         });
     });
 })(jQuery);

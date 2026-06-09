@@ -50,10 +50,13 @@ class WB2B_Auth {
      * @return string
      */
     public function render_auth_page($atts = []) {
+        $ui_style   = get_option('wb2b_auth_ui_style', 'theme');
+        $skin_class = 'wb2b-skin--' . sanitize_html_class($ui_style);
+
         // Already logged in and approved.
         if (is_user_logged_in() && WB2B_Customer::has_access(get_current_user_id())) {
             $shop = wc_get_page_permalink('shop');
-            return '<div class="wb2b-auth wb2b-auth--note"><p>'
+            return '<div class="wb2b-auth ' . esc_attr($skin_class) . ' wb2b-auth--note"><p>'
                 . esc_html__('You are logged in.', 'woo-b2b') . ' '
                 . '<a href="' . esc_url($shop) . '">' . esc_html__('Continue to the shop', 'woo-b2b') . '</a> &middot; '
                 . '<a href="' . esc_url(wp_logout_url($shop)) . '">' . esc_html__('Log out', 'woo-b2b') . '</a>'

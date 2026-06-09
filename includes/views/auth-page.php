@@ -7,6 +7,7 @@
  * @var array  $countries   code => label.
  * @var array  $salutations value => label.
  * @var array  $old         Repopulation input from a failed submission.
+ * @var string $skin_class  Auth wrapper skin modifier (wb2b-skin--theme|--default).
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +21,7 @@ $val = function ($key) use ($old) {
     return isset($old[$key]) ? $old[$key] : '';
 };
 ?>
-<div class="wb2b-auth">
+<div class="wb2b-auth <?php echo esc_attr($skin_class); ?>">
 
     <?php if (!empty($flash) && !empty($flash['messages'])) : ?>
         <?php $notice_class = (isset($flash['type']) && $flash['type'] === 'success') ? 'wb2b-notice--success' : 'wb2b-notice--error'; ?>

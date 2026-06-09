@@ -268,3 +268,46 @@
     max-width: 640px;
     margin: 0 auto;
 }
+
+/* ============================================================
+   Skin: inherit active-theme styles. Remaps the plugin's auth
+   variables to WoodMart's design tokens, each with the plugin's
+   own value as a fallback — so on a theme that doesn't define
+   these tokens the page simply renders the default look.
+   Applied via the "Inherit theme styles" setting.
+   ============================================================ */
+.wb2b-auth.wb2b-skin--theme {
+    --wb2b-primary: var(--btn-accented-bgcolor, var(--wd-primary-color, #2b6cb0));
+    --wb2b-primary-hover: var(--btn-accented-bgcolor-hover, var(--wd-primary-color, #245a96));
+    --wb2b-border: var(--wd-form-brd-color, #d9dee5);
+    --wb2b-muted: var(--wd-title-color, #6b7280);
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-input,
+.wb2b-auth.wb2b-skin--theme .wb2b-field input[type="text"],
+.wb2b-auth.wb2b-skin--theme .wb2b-field input[type="email"],
+.wb2b-auth.wb2b-skin--theme .wb2b-field input[type="password"],
+.wb2b-auth.wb2b-skin--theme .wb2b-field select {
+    border-radius: var(--wd-form-brd-radius, var(--wd-brd-radius, 7px));
+    min-height: var(--wd-form-height, 42px);
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-input:focus,
+.wb2b-auth.wb2b-skin--theme .wb2b-field input:focus,
+.wb2b-auth.wb2b-skin--theme .wb2b-field select:focus {
+    border-color: var(--wb2b-primary);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-btn {
+    color: var(--btn-accented-color, #fff);
+    border-radius: var(--btn-accented-brd-radius, var(--wd-brd-radius, 7px));
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-btn:hover {
+    color: var(--btn-accented-color-hover, var(--btn-accented-color, #fff));
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-card {
+    border-radius: var(--wd-brd-radius, 10px);
+}

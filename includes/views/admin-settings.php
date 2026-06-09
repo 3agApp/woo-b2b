@@ -12,6 +12,7 @@
  * @var int    $doc_max_mb
  * @var int    $min_password
  * @var string $admin_email
+ * @var string $auth_ui_style
  * @var array  $all_countries
  */
 
@@ -82,6 +83,23 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
             </div>
         </section>
 
+        <!-- Appearance -->
+        <section class="wb2b-section wb2b-card">
+            <div class="wb2b-card-header">
+                <h2><span class="dashicons dashicons-admin-customizer"></span> <?php esc_html_e('Appearance', 'woo-b2b'); ?></h2>
+            </div>
+            <div class="wb2b-card-body">
+                <div class="wb2b-form-row">
+                    <label class="wb2b-label" for="wb2b_auth_ui_style"><?php esc_html_e('Authentication page style', 'woo-b2b'); ?></label>
+                    <select name="wb2b_auth_ui_style" id="wb2b_auth_ui_style" class="wb2b-select wb2b-input-wide">
+                        <option value="theme" <?php selected($auth_ui_style, 'theme'); ?>><?php esc_html_e('Inherit theme styles', 'woo-b2b'); ?></option>
+                        <option value="default" <?php selected($auth_ui_style, 'default'); ?>><?php esc_html_e('Use plugin\'s own styles', 'woo-b2b'); ?></option>
+                    </select>
+                    <p class="wb2b-help-text"><?php esc_html_e('"Inherit theme styles" adopts your active theme\'s colors, buttons and form fields on the [woo_b2b_auth] page (optimized for WoodMart). On other themes it falls back to the plugin\'s own design.', 'woo-b2b'); ?></p>
+                </div>
+            </div>
+        </section>
+
         <!-- Registration -->
         <section class="wb2b-section wb2b-card">
             <div class="wb2b-card-header">
@@ -114,7 +132,7 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
 
                 <div class="wb2b-form-row">
                     <label class="wb2b-label" for="wb2b_min_password"><?php esc_html_e('Minimum password length', 'woo-b2b'); ?></label>
-                    <input type="number" name="wb2b_min_password" id="wb2b_min_password" class="wb2b-input" style="max-width:120px;" min="4" max="64" value="<?php echo esc_attr($min_password); ?>">
+                    <input type="number" name="wb2b_min_password" id="wb2b_min_password" class="wb2b-input wb2b-input-sm" min="4" max="64" value="<?php echo esc_attr($min_password); ?>">
                 </div>
             </div>
         </section>
@@ -151,7 +169,7 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
 
                 <div class="wb2b-form-row">
                     <label class="wb2b-label" for="wb2b_doc_max_mb"><?php esc_html_e('Maximum file size (MB)', 'woo-b2b'); ?></label>
-                    <input type="number" name="wb2b_doc_max_mb" id="wb2b_doc_max_mb" class="wb2b-input" style="max-width:120px;" min="1" max="100" value="<?php echo esc_attr($doc_max_mb); ?>">
+                    <input type="number" name="wb2b_doc_max_mb" id="wb2b_doc_max_mb" class="wb2b-input wb2b-input-sm" min="1" max="100" value="<?php echo esc_attr($doc_max_mb); ?>">
                 </div>
             </div>
         </section>
@@ -164,7 +182,7 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
             <div class="wb2b-card-body">
                 <div class="wb2b-form-row">
                     <label class="wb2b-label" for="wb2b_admin_email"><?php esc_html_e('Notification email', 'woo-b2b'); ?></label>
-                    <input type="email" name="wb2b_admin_email" id="wb2b_admin_email" class="wb2b-input" style="max-width:420px;" value="<?php echo esc_attr($admin_email); ?>">
+                    <input type="email" name="wb2b_admin_email" id="wb2b_admin_email" class="wb2b-input wb2b-input-wide" value="<?php echo esc_attr($admin_email); ?>">
                     <p class="wb2b-help-text"><?php esc_html_e('Where new-registration notifications are sent.', 'woo-b2b'); ?></p>
                 </div>
             </div>
