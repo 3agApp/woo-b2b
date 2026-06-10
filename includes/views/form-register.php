@@ -278,7 +278,7 @@ $render_country = function ($name, $id, $current, $required = true) use ($countr
         <p class="wb2b-required-note"><?php esc_html_e('Fields marked with an asterisk (*) are required.', 'woo-b2b'); ?></p>
 
         <p class="wb2b-submit">
-            <button type="submit" class="wb2b-btn wb2b-btn--primary wb2b-btn--lg"><?php esc_html_e('Create account', 'woo-b2b'); ?></button>
+            <button type="submit" class="wb2b-btn wb2b-btn--primary wb2b-btn--lg wb2b-btn--block"><?php esc_html_e('Create account', 'woo-b2b'); ?></button>
         </p>
     </form>
 </div>

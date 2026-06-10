@@ -195,6 +195,94 @@
             });
         });
 
+        // ----- Bulk selection + actions -----
+        function selectedIds() {
+            return $('.wb2b-row-check:checked').map(function () { return $(this).val(); }).get();
+        }
+
+        function refreshBulkBar() {
+            var ids = selectedIds();
+            var total = $('.wb2b-row-check').length;
+            $('.wb2b-bulk-n').text(ids.length);
+            $('.wb2b-bulkbar').prop('hidden', ids.length === 0);
+            $('.wb2b-check-all').prop('checked', total > 0 && ids.length === total);
+        }
+
+        $(document).on('change', '.wb2b-check-all', function () {
+            $('.wb2b-row-check').prop('checked', $(this).prop('checked'));
+            refreshBulkBar();
+        });
+        $(document).on('change', '.wb2b-row-check', refreshBulkBar);
+
+        function bulk(doAction, reason) {
+            var ids = selectedIds();
+            if (!ids.length) {
+                return;
+            }
+            $('.wb2b-bulkbar').find('button').prop('disabled', true);
+            $.post(wb2b_admin.ajax_url, { action: 'wb2b_bulk', nonce: wb2b_admin.nonce, do: doAction, user_ids: ids, reason: reason || '' })
+                .done(function (response) {
+                    if (response && response.success) {
+                        notice((response.data && response.data.message) || '', true);
+                        $.each(ids, function (i, id) {
+                            $('#wb2b-user-' + id).fadeOut(300, function () { $(this).remove(); });
+                        });
+                        setTimeout(function () { window.location.reload(); }, 700);
+                    } else {
+                        notice((response && response.data && response.data.message) || wb2b_admin.strings.error, false);
+                        $('.wb2b-bulkbar').find('button').prop('disabled', false);
+                    }
+                })
+                .fail(function () {
+                    notice(wb2b_admin.strings.error, false);
+                    $('.wb2b-bulkbar').find('button').prop('disabled', false);
+                });
+        }
+
+        $(document).on('click', '.wb2b-bulk-approve', function () {
+            var n = selectedIds().length;
+            wb2bConfirm({
+                title: wb2b_admin.strings.approve_title,
+                message: (wb2b_admin.strings.bulk_approve_confirm || '').replace('%d', n),
+                confirmLabel: wb2b_admin.strings.approve,
+                icon: 'dashicons-yes-alt'
+            }).then(function (ok) { if (ok) { bulk('approve', ''); } });
+        });
+
+        $(document).on('click', '.wb2b-bulk-reject', function () {
+            wb2bPrompt({
+                title: wb2b_admin.strings.reject_title,
+                label: wb2b_admin.strings.reject_prompt,
+                confirmLabel: wb2b_admin.strings.reject,
+                danger: true,
+                icon: 'dashicons-dismiss'
+            }).then(function (reason) { if (reason !== null) { bulk('reject', reason); } });
+        });
+
+        // ----- Settings: AJAX save -----
+        $('#wb2b-settings-form').on('submit', function (e) {
+            e.preventDefault();
+            var $form = $(this);
+            var $btn = $form.find('button[type="submit"]');
+            var label = $btn.html();
+            $btn.prop('disabled', true).html('<span class="wb2b-spinner"></span> ' + wb2b_admin.strings.working);
+            $.post(wb2b_admin.ajax_url, $form.serialize() + '&action=wb2b_save_settings&nonce=' + encodeURIComponent(wb2b_admin.nonce))
+                .done(function (response) {
+                    if (response && response.success) {
+                        var $msg = $form.find('.wb2b-saved-msg').addClass('is-visible');
+                        setTimeout(function () { $msg.removeClass('is-visible'); }, 2500);
+                        notice((response.data && response.data.message) || '', true);
+                    } else {
+                        notice((response && response.data && response.data.message) || wb2b_admin.strings.error, false);
+                    }
+                    $btn.prop('disabled', false).html(label);
+                })
+                .fail(function () {
+                    notice(wb2b_admin.strings.error, false);
+                    $btn.prop('disabled', false).html(label);
+                });
+        });
+
         // License management.
         $('#wb2b-license-form').on('submit', function (e) {
             e.preventDefault();

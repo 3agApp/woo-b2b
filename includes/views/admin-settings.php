@@ -28,14 +28,16 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
 <div class="wrap wb2b-ui wb2b-settings-page">
 
     <div class="wb2b-header">
-        <div class="wb2b-header-left">
-            <h1><?php esc_html_e('Woo B2B Settings', 'woo-b2b'); ?></h1>
-            <p class="wb2b-subtitle"><?php esc_html_e('Configure the catalog lock, registration, and notifications', 'woo-b2b'); ?></p>
+        <div class="wb2b-header-main">
+            <div class="wb2b-header-icon"><span class="dashicons dashicons-admin-settings"></span></div>
+            <div class="wb2b-header-left">
+                <h1><?php esc_html_e('Woo B2B Settings', 'woo-b2b'); ?></h1>
+                <p class="wb2b-subtitle"><?php esc_html_e('Configure the catalog lock, registration, and notifications', 'woo-b2b'); ?></p>
+            </div>
         </div>
     </div>
 
-    <form method="post" action="options.php">
-        <?php settings_fields('wb2b_settings'); ?>
+    <form id="wb2b-settings-form" method="post">
 
         <!-- Access control -->
         <section class="wb2b-section wb2b-card">
@@ -188,10 +190,11 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
             </div>
         </section>
 
-        <div class="wb2b-form-actions wb2b-sticky-bottom">
+        <div class="wb2b-form-actions">
             <button type="submit" class="wb2b-btn wb2b-btn-primary wb2b-btn-lg">
-                <span class="dashicons dashicons-saved"></span> <?php esc_html_e('Save Settings', 'woo-b2b'); ?>
+                <span class="dashicons dashicons-saved"></span> <?php esc_html_e('Save settings', 'woo-b2b'); ?>
             </button>
+            <span class="wb2b-saved-msg"><span class="dashicons dashicons-yes-alt"></span> <?php esc_html_e('Saved', 'woo-b2b'); ?></span>
         </div>
     </form>
 </div>

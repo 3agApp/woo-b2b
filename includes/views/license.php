@@ -49,9 +49,12 @@ $mask_key = function ($key) {
 
 <div class="wrap wb2b-ui wb2b-license-wrap">
     <div class="wb2b-header">
-        <div class="wb2b-header-left">
-            <h1><?php esc_html_e('License', 'woo-b2b'); ?></h1>
-            <p class="wb2b-subtitle"><?php esc_html_e('Manage your plugin license activation', 'woo-b2b'); ?></p>
+        <div class="wb2b-header-main">
+            <div class="wb2b-header-icon"><span class="dashicons dashicons-admin-network"></span></div>
+            <div class="wb2b-header-left">
+                <h1><?php esc_html_e('License', 'woo-b2b'); ?></h1>
+                <p class="wb2b-subtitle"><?php esc_html_e('Manage your plugin license activation', 'woo-b2b'); ?></p>
+            </div>
         </div>
     </div>
 

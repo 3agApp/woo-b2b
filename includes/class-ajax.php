@@ -14,6 +14,8 @@ class WB2B_Ajax {
     public function __construct() {
         add_action('wp_ajax_wb2b_approve', [$this, 'approve']);
         add_action('wp_ajax_wb2b_reject', [$this, 'reject']);
+        add_action('wp_ajax_wb2b_bulk', [$this, 'bulk']);
+        add_action('wp_ajax_wb2b_save_settings', [$this, 'save_settings']);
 
         // License + updates.
         add_action('wp_ajax_wb2b_activate_license', [$this, 'activate_license']);
@@ -78,6 +80,72 @@ class WB2B_Ajax {
             'status'  => WB2B_Customer::STATUS_REJECTED,
             'label'   => WB2B_Customer::get_status_label(WB2B_Customer::STATUS_REJECTED),
         ]);
+    }
+
+    /**
+     * Bulk approve / reject customers.
+     */
+    public function bulk() {
+        $this->verify();
+
+        $do     = isset($_POST['do']) ? sanitize_key($_POST['do']) : '';
+        $ids    = isset($_POST['user_ids']) ? array_map('absint', (array) wp_unslash($_POST['user_ids'])) : [];
+        $ids    = array_values(array_filter(array_unique($ids)));
+        $reason = isset($_POST['reason']) ? sanitize_textarea_field(wp_unslash($_POST['reason'])) : '';
+
+        if (!in_array($do, ['approve', 'reject'], true) || empty($ids)) {
+            wp_send_json_error(['message' => __('Nothing to do.', 'woo-b2b')]);
+        }
+
+        $status = $do === 'approve' ? WB2B_Customer::STATUS_APPROVED : WB2B_Customer::STATUS_REJECTED;
+        $done   = 0;
+
+        foreach ($ids as $user_id) {
+            if (!get_userdata($user_id)) {
+                continue;
+            }
+            WB2B_Customer::set_status($user_id, $status, $reason);
+            if ($do === 'approve') {
+                WB2B()->emails->send_customer_approved($user_id);
+            } else {
+                WB2B()->emails->send_customer_rejected($user_id, $reason);
+            }
+            $done++;
+        }
+
+        wp_send_json_success([
+            /* translators: %d: number of customers updated */
+            'message' => sprintf(_n('%d customer updated.', '%d customers updated.', $done, 'woo-b2b'), $done),
+            'ids'     => $ids,
+        ]);
+    }
+
+    /**
+     * Save the settings form via AJAX. Reuses the sanitizer callbacks on WB2B_Admin.
+     */
+    public function save_settings() {
+        $this->verify();
+
+        $admin = WB2B()->admin;
+        if (!$admin) {
+            wp_send_json_error(['message' => __('Settings handler unavailable.', 'woo-b2b')]);
+        }
+
+        $post = wp_unslash($_POST);
+
+        update_option('wb2b_enabled', $admin->sanitize_bool(isset($post['wb2b_enabled']) ? $post['wb2b_enabled'] : 0));
+        update_option('wb2b_auto_approve', $admin->sanitize_bool(isset($post['wb2b_auto_approve']) ? $post['wb2b_auto_approve'] : 0));
+        update_option('wb2b_require_documents', $admin->sanitize_bool(isset($post['wb2b_require_documents']) ? $post['wb2b_require_documents'] : 0));
+        update_option('wb2b_auth_page_id', isset($post['wb2b_auth_page_id']) ? absint($post['wb2b_auth_page_id']) : 0);
+        update_option('wb2b_doc_max_mb', isset($post['wb2b_doc_max_mb']) ? absint($post['wb2b_doc_max_mb']) : 10);
+        update_option('wb2b_min_password', $admin->sanitize_min_password(isset($post['wb2b_min_password']) ? $post['wb2b_min_password'] : 8));
+        update_option('wb2b_admin_email', sanitize_email(isset($post['wb2b_admin_email']) ? $post['wb2b_admin_email'] : ''));
+        update_option('wb2b_allowed_pages', $admin->sanitize_id_array(isset($post['wb2b_allowed_pages']) ? $post['wb2b_allowed_pages'] : []));
+        update_option('wb2b_countries', $admin->sanitize_countries(isset($post['wb2b_countries']) ? $post['wb2b_countries'] : []));
+        update_option('wb2b_doc_mimes', $admin->sanitize_mimes(isset($post['wb2b_doc_mimes']) ? $post['wb2b_doc_mimes'] : []));
+        update_option('wb2b_auth_ui_style', $admin->sanitize_ui_style(isset($post['wb2b_auth_ui_style']) ? $post['wb2b_auth_ui_style'] : 'theme'));
+
+        wp_send_json_success(['message' => __('Settings saved.', 'woo-b2b')]);
     }
 
     /* ----- License ----- */

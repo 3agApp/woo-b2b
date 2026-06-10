@@ -40,17 +40,7 @@ if (!defined('ABSPATH')) {
         </p>
 
         <p class="wb2b-submit">
-            <button type="submit" class="wb2b-btn wb2b-btn--primary"><?php esc_html_e('Log in', 'woo-b2b'); ?></button>
+            <button type="submit" class="wb2b-btn wb2b-btn--primary wb2b-btn--block"><?php esc_html_e('Log in', 'woo-b2b'); ?></button>
         </p>
     </form>
-
-    <div class="wb2b-advantages">
-        <h3 class="wb2b-advantages__title"><?php esc_html_e('Benefits of registering:', 'woo-b2b'); ?></h3>
-        <ul>
-            <li><?php esc_html_e('Fast checkout', 'woo-b2b'); ?></li>
-            <li><?php esc_html_e('Save your data and preferences', 'woo-b2b'); ?></li>
-            <li><?php esc_html_e('Order overview and shipping information', 'woo-b2b'); ?></li>
-            <li><?php esc_html_e('Access to wholesale pricing once approved', 'woo-b2b'); ?></li>
-        </ul>
-    </div>
 </div>

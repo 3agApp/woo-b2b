@@ -23,6 +23,19 @@ $val = function ($key) use ($old) {
 ?>
 <div class="wb2b-auth <?php echo esc_attr($skin_class); ?>">
 
+    <section class="wb2b-hero">
+        <div class="wb2b-hero__text">
+            <span class="wb2b-hero__eyebrow"><?php esc_html_e('Wholesale portal', 'woo-b2b'); ?></span>
+            <h2 class="wb2b-hero__title"><?php esc_html_e('Trade account access', 'woo-b2b'); ?></h2>
+            <p class="wb2b-hero__subtitle"><?php esc_html_e('Sign in to your business account, or register to apply for wholesale access. New accounts are reviewed by our team before activation.', 'woo-b2b'); ?></p>
+        </div>
+        <ul class="wb2b-benefits">
+            <li class="wb2b-benefit"><span class="wb2b-benefit__check"></span><?php esc_html_e('Wholesale pricing once approved', 'woo-b2b'); ?></li>
+            <li class="wb2b-benefit"><span class="wb2b-benefit__check"></span><?php esc_html_e('Fast checkout &amp; saved details', 'woo-b2b'); ?></li>
+            <li class="wb2b-benefit"><span class="wb2b-benefit__check"></span><?php esc_html_e('Full order history &amp; invoices', 'woo-b2b'); ?></li>
+        </ul>
+    </section>
+
     <?php if (!empty($flash) && !empty($flash['messages'])) : ?>
         <?php $notice_class = (isset($flash['type']) && $flash['type'] === 'success') ? 'wb2b-notice--success' : 'wb2b-notice--error'; ?>
         <div class="wb2b-notice <?php echo esc_attr($notice_class); ?>">

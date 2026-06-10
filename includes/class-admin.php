@@ -114,6 +114,7 @@ class WB2B_Admin {
                 'deactivate'         => __('Deactivate', 'woo-b2b'),
                 'update_title'       => __('Install update', 'woo-b2b'),
                 'update'             => __('Update now', 'woo-b2b'),
+                'bulk_approve_confirm' => __('Approve %d selected customer(s)?', 'woo-b2b'),
             ],
         ]);
     }
@@ -191,23 +192,49 @@ class WB2B_Admin {
             $status = WB2B_Customer::STATUS_PENDING;
         }
 
+        // Filters.
+        $search  = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
+        $country = isset($_GET['country']) ? strtoupper(sanitize_text_field(wp_unslash($_GET['country']))) : '';
+        if (!preg_match('/^[A-Z]{2}$/', $country)) {
+            $country = '';
+        }
+        $order = (isset($_GET['order']) && strtoupper(sanitize_key($_GET['order'])) === 'ASC') ? 'ASC' : 'DESC';
+
         $paged    = isset($_GET['paged']) ? max(1, absint($_GET['paged'])) : 1;
         $per_page = 20;
 
-        $query = new WP_User_Query([
-            'meta_key'    => WB2B_Customer::META_STATUS,
-            'meta_value'  => $status,
+        $meta_query = [['key' => WB2B_Customer::META_STATUS, 'value' => $status]];
+        if ($country !== '') {
+            $meta_query[]           = ['key' => 'billing_country', 'value' => $country];
+            $meta_query['relation'] = 'AND';
+        }
+
+        $args = [
+            'meta_query'  => $meta_query,
             'number'      => $per_page,
             'offset'      => ($paged - 1) * $per_page,
             'orderby'     => 'registered',
-            'order'       => 'DESC',
+            'order'       => $order,
             'count_total' => true,
-        ]);
+        ];
+        if ($search !== '') {
+            $args['search']         = '*' . $search . '*';
+            $args['search_columns'] = ['user_login', 'user_email', 'user_nicename', 'display_name'];
+        }
+
+        $query = new WP_User_Query($args);
 
         $users       = $query->get_results();
         $total       = $query->get_total();
         $total_pages = (int) ceil($total / $per_page);
         $counts      = WB2B_Customer::get_status_counts();
+
+        // Country options for the filter (limited to the configured allowed countries).
+        $wc_countries  = (function_exists('WC') && WC()->countries) ? WC()->countries->get_countries() : [];
+        $country_opts  = [];
+        foreach (array_map('strtoupper', (array) get_option('wb2b_countries', ['CH', 'LI'])) as $code) {
+            $country_opts[$code] = isset($wc_countries[$code]) ? $wc_countries[$code] : $code;
+        }
 
         include WB2B_PLUGIN_DIR . 'includes/views/admin-approvals.php';
     }
