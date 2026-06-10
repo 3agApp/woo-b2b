@@ -242,6 +242,21 @@
     text-align: center;
 }
 
+/* Win over the active theme's generic button reset (e.g. WoodMart styles every
+   [type=submit] with a near-white --btn-bgcolor at the same specificity as .wb2b-btn,
+   so its later rule would otherwise hide our button). 0,2,0 beats [type=submit] 0,1,0. */
+.wb2b-auth .wb2b-btn {
+    background-color: var(--wb2b-primary);
+    color: #fff;
+    box-shadow: 0 6px 16px -6px var(--wb2b-primary);
+}
+
+.wb2b-auth .wb2b-btn:hover,
+.wb2b-auth .wb2b-btn:focus {
+    background-color: var(--wb2b-primary-hover);
+    color: #fff;
+}
+
 .wb2b-submit {
     margin: 18px 0 0;
 }
@@ -300,17 +315,35 @@
 .wb2b-auth.wb2b-skin--theme {
     --wb2b-primary: var(--wd-primary-color, var(--btn-accented-bgcolor, #2b6cb0));
     --wb2b-primary-hover: var(--btn-accented-bgcolor-hover, var(--wd-primary-color, #245a96));
+    --wb2b-bg: var(--bgcolor-white, #fff);          /* surface — flips in dark mode */
     --wb2b-border: var(--wd-form-brd-color, #d9dee5);
-    --wb2b-muted: var(--wd-title-color, #6b7280);
+    --wb2b-muted: var(--wd-text-color, #6b7280);
+    color: var(--wd-text-color, inherit);           /* body text follows the scheme */
+}
+
+/* Headings + labels follow the theme's title colour (also flips in dark mode). */
+.wb2b-auth.wb2b-skin--theme .wb2b-card__title,
+.wb2b-auth.wb2b-skin--theme .wb2b-fieldset legend,
+.wb2b-auth.wb2b-skin--theme .wb2b-field label {
+    color: var(--wd-title-color, inherit);
 }
 
 .wb2b-auth.wb2b-skin--theme .wb2b-input,
 .wb2b-auth.wb2b-skin--theme .wb2b-field input[type="text"],
 .wb2b-auth.wb2b-skin--theme .wb2b-field input[type="email"],
 .wb2b-auth.wb2b-skin--theme .wb2b-field input[type="password"],
-.wb2b-auth.wb2b-skin--theme .wb2b-field select {
+.wb2b-auth.wb2b-skin--theme .wb2b-field input[type="file"],
+.wb2b-auth.wb2b-skin--theme .wb2b-field select,
+.wb2b-auth.wb2b-skin--theme .wb2b-field textarea {
+    background: var(--wd-form-bg, #fff);            /* form fields follow the scheme */
+    color: var(--wd-form-color, inherit);
     border-radius: var(--wd-form-brd-radius, var(--wd-brd-radius, 7px));
     min-height: var(--wd-form-height, 42px);
+}
+
+.wb2b-auth.wb2b-skin--theme .wb2b-input::placeholder,
+.wb2b-auth.wb2b-skin--theme .wb2b-field input::placeholder {
+    color: var(--wd-form-placeholder, #94a3b8);
 }
 
 .wb2b-auth.wb2b-skin--theme .wb2b-input:focus,
@@ -331,6 +364,11 @@
 
 .wb2b-auth.wb2b-skin--theme .wb2b-card {
     border-radius: var(--wd-brd-radius, 10px);
+}
+
+/* Subtle panel that works on light or dark surfaces. */
+.wb2b-auth.wb2b-skin--theme .wb2b-privacy {
+    background: color-mix(in srgb, var(--wd-text-color, #0f172a) 5%, var(--bgcolor-white, #fff));
 }
 
 /* ============================================================

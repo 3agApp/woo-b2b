@@ -23,7 +23,9 @@
 /* ============================================================
    Design tokens
    ============================================================ */
-.wb2b-ui {
+/* Tokens live on :root so body-level UI (modal, toast) inherits them too —
+   admin.css only loads on our screens, so this stays scoped to those pages. */
+:root {
     --wb2b-primary: #2563eb;
     --wb2b-primary-hover: #1d4ed8;
     --wb2b-primary-light: #eff6ff;
@@ -51,6 +53,9 @@
     --wb2b-shadow: 0 1px 3px 0 rgb(15 23 42 / 0.08), 0 1px 2px -1px rgb(15 23 42 / 0.04);
     --wb2b-shadow-md: 0 4px 12px -2px rgb(15 23 42 / 0.08);
     --wb2b-shadow-lg: 0 10px 24px -6px rgb(15 23 42 / 0.12);
+}
+
+.wb2b-ui {
     margin: 20px 20px 20px 0;
     color: var(--wb2b-gray-700);
 }
