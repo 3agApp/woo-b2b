@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,12 @@ They are stored as private attachments and linked from the customer row on the a
 The interface is English for now. All strings are translation-ready (text domain `woo-b2b`).
 
 == Changelog ==
+
+= 1.1.0 =
+* Redesigned admin UI with a modern, consistent design system and AJAX settings save (no page reload).
+* New B2B Customers dashboard: status stat cards plus customer search, country filter, sort, and bulk approve/reject.
+* Replaced browser confirm/prompt popups with styled, accessible in-page dialogs.
+* Auth page: selectable UI style (inherit the active theme's styles, or use the plugin's own), a refreshed two-column layout with a hero/benefits panel, and full WoodMart theme inheritance — including dark-mode support.
 
 = 1.0.1 =
 * Version bump for the current release.
