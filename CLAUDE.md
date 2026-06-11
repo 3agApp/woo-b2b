@@ -15,8 +15,8 @@ a WoodMart-theme store.
   the global `WB2B()`, and an SPL autoloader: **`WB2B_Foo_Bar` → `includes/class-foo-bar.php`**.
 - **Components** (instantiated on `plugins_loaded`, after a WooCommerce check): `WB2B_Logs`,
   `WB2B_Customer`, `WB2B_Emails`, `WB2B_Access`, `WB2B_Auth`, `WB2B_Ajax`, `WB2B_License`,
-  `WB2B_Updater`, and `WB2B_Admin` (admin requests only). Reach them via `WB2B()->emails`,
-  `WB2B()->license`, etc.
+  `WB2B_Updater`, `WB2B_Payments`, and `WB2B_Admin` (admin requests only). Reach them via
+  `WB2B()->emails`, `WB2B()->license`, etc.
 - **Customer status** lives in user meta `wb2b_status` = `pending|approved|rejected` (see
   `WB2B_Customer` constants/helpers). Addresses map to native WooCommerce billing/shipping meta.
 
@@ -74,6 +74,18 @@ wrapper class:
   plugin's own value as a `var()` fallback — so it degrades to the default look on non-WoodMart
   themes. Add new themes as more `wb2b-skin--*` blocks + a whitelist value in `sanitize_ui_style()`.
 - `default` → the plugin's self-contained palette (no remap).
+
+## Payments — Pay by Invoice
+
+`WB2B_Payments` registers the `WB2B_Gateway_Invoice` gateway (id **`wb2b_invoice`**, extends
+`WC_Payment_Gateway`, modelled on WooCommerce BACS) and gates it to approved customers via
+`woocommerce_available_payment_gateways` + `WB2B_Customer::has_access()`. The gateway is an offline
+"on account" method: at checkout the order is set to its configured status (default `on-hold`,
+which auto-reduces stock via WC's status-transition hooks — don't reduce stock manually). Settings
+live under **WooCommerce → Settings → Payments → Pay by Invoice** (WC-native option
+`woocommerce_wb2b_invoice_settings`), *not* the plugin's own settings page. Net terms (`terms_days`,
+default 30) yield a due date stored as order meta `_wb2b_invoice_due_date` / `_wb2b_invoice_terms_days`
+(HPOS CRUD), shown on the order-received page and in customer emails.
 
 ## License & updates
 

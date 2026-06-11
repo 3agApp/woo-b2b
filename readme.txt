@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ They are stored as private attachments and linked from the customer row on the a
 The interface is English for now. All strings are translation-ready (text domain `woo-b2b`).
 
 == Changelog ==
+
+= 1.2.0 =
+* New **Pay by Invoice** payment method for approved B2B customers: orders are placed on account (on-hold) and settled later against an invoice.
+* Configurable net payment terms (default 30 days); the due date is stored on the order and shown on the order-received page and in customer emails.
+* Configure it under **WooCommerce → Settings → Payments → Pay by Invoice** (title, description, instructions, order status, payment terms). The method is only offered to approved B2B customers.
 
 = 1.1.0 =
 * Redesigned admin UI with a modern, consistent design system and AJAX settings save (no page reload).
