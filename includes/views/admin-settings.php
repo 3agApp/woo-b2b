@@ -48,11 +48,10 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
                 <div class="wb2b-form-row">
                     <label class="wb2b-label" for="wb2b_access_mode"><?php esc_html_e('Access mode', 'woo-b2b'); ?></label>
                     <select name="wb2b_access_mode" id="wb2b_access_mode" class="wb2b-select wb2b-input-wide">
-                        <option value="redirect" <?php selected($access_mode, 'redirect'); ?>><?php esc_html_e('Full lock — redirect guests to login', 'woo-b2b'); ?></option>
+                        <option value="redirect" <?php selected($access_mode, 'redirect'); ?>><?php esc_html_e('Lockdown — redirect guests to the account page', 'woo-b2b'); ?></option>
                         <option value="prices" <?php selected($access_mode, 'prices'); ?>><?php esc_html_e('Show catalog, hide prices', 'woo-b2b'); ?></option>
-                        <option value="off" <?php selected($access_mode, 'off'); ?>><?php esc_html_e('Off — public store (no B2B lock)', 'woo-b2b'); ?></option>
                     </select>
-                    <p class="wb2b-help-text"><?php esc_html_e('"Full lock" redirects guests and unapproved users to the account page. "Show catalog, hide prices" lets guests browse products but hides prices and disables purchasing until they log in. "Off" makes the storefront fully public.', 'woo-b2b'); ?></p>
+                    <p class="wb2b-help-text"><?php esc_html_e('"Lockdown" redirects guests to the account page, where they log in or register. "Show catalog, hide prices" lets guests browse products but hides prices and disables purchasing until they log in. To fully disable the B2B lock, deactivate the plugin.', 'woo-b2b'); ?></p>
                 </div>
 
                 <div class="wb2b-form-row">

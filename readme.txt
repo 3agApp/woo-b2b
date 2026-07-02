@@ -60,9 +60,10 @@ The interface is English for now. All strings are translation-ready (text domain
 == Changelog ==
 
 = 1.3.0 =
-* New **Access mode** setting replacing the on/off B2B lock: choose **Full lock** (redirect guests to login), **Show catalog, hide prices** (guests can browse products but prices are hidden and purchasing is disabled until they log in), or **Off** (public store).
+* New **Access mode** setting replacing the on/off B2B lock: choose **Lockdown** (redirect guests to the account page) or **Show catalog, hide prices** (guests can browse products but prices are hidden and purchasing is disabled until they log in).
 * In "Show catalog, hide prices" mode, guests see a "Log in to see prices" link in place of prices and Add to Cart; approved customers and admins see prices as normal.
-* Existing sites are migrated automatically: the previous "enabled" lock maps to Full lock, "disabled" maps to Off.
+* **Single sign-in surface:** login and the custom B2B registration now live on the WooCommerce My Account page. Native WooCommerce/theme registration is disabled so new customers always register through the approval form; login stays gated (unapproved accounts cannot sign in).
+* Existing sites are migrated automatically to Lockdown mode.
 
 = 1.2.0 =
 * New **Pay by Invoice** payment method for approved B2B customers: orders are placed on account (on-hold) and settled later against an invoice.

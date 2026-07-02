@@ -29,20 +29,19 @@ class WB2B_Access {
     /**
      * Current access mode: how the storefront is gated.
      *
-     *  - 'redirect' — full lock; guests/unapproved users are sent to the auth page.
+     *  - 'redirect' — lockdown; guests are sent to the My Account (auth) page.
      *  - 'prices'   — public catalog, but prices are hidden and purchasing disabled for guests.
-     *  - 'off'      — no B2B lock; the store behaves like stock WooCommerce.
      *
-     * Falls back to the legacy `wb2b_enabled` boolean so existing installs keep their behaviour
-     * (true → 'redirect', false → 'off') until the option is saved from Settings.
+     * The store is always gated in one of these two modes; to disable the plugin entirely,
+     * deactivate it. Falls back to the legacy `wb2b_enabled` boolean so existing installs keep
+     * their gated behaviour (always → 'redirect') until the option is saved from Settings.
      *
      * @return string
      */
     public static function get_mode() {
-        $legacy = get_option('wb2b_enabled', true) ? 'redirect' : 'off';
-        $mode   = get_option('wb2b_access_mode', $legacy);
+        $mode = get_option('wb2b_access_mode', 'redirect');
 
-        return in_array($mode, ['redirect', 'prices', 'off'], true) ? $mode : 'redirect';
+        return in_array($mode, ['redirect', 'prices'], true) ? $mode : 'redirect';
     }
 
     /**
@@ -51,10 +50,6 @@ class WB2B_Access {
      * @return bool
      */
     protected function is_bypassed() {
-        if (self::get_mode() === 'off') {
-            return true;
-        }
-
         if (is_admin() || wp_doing_ajax() || (defined('DOING_CRON') && DOING_CRON)) {
             return true;
         }
@@ -87,6 +82,13 @@ class WB2B_Access {
             return false;
         }
 
+        // The My Account page is the auth surface — always public (avoids a redirect loop).
+        $account_id = function_exists('wc_get_page_id') ? (int) wc_get_page_id('myaccount') : 0;
+        if ($account_id > 0 && $object_id === $account_id) {
+            return true;
+        }
+
+        // The standalone [woo_b2b_auth] page (backward-compat alias) stays public too.
         $auth_page_id = self::get_auth_page_id();
         if ($auth_page_id && $object_id === $auth_page_id) {
             return true;
@@ -99,14 +101,30 @@ class WB2B_Access {
     }
 
     /**
-     * Redirect guests / unapproved users to the auth page.
+     * URL of the auth surface (the WooCommerce My Account page), with the standalone
+     * [woo_b2b_auth] page as a fallback.
+     *
+     * @return string Empty string if neither can be resolved.
+     */
+    public static function get_auth_url() {
+        $account = function_exists('wc_get_page_permalink') ? wc_get_page_permalink('myaccount') : '';
+        if ($account) {
+            return $account;
+        }
+
+        $auth_page_id = self::get_auth_page_id();
+        return $auth_page_id ? (string) get_permalink($auth_page_id) : '';
+    }
+
+    /**
+     * Redirect guests / unapproved users to the auth (My Account) page.
      */
     public function maybe_redirect() {
         if ($this->is_bypassed()) {
             return;
         }
 
-        // Only the full-lock mode redirects; 'prices' keeps the catalog public.
+        // Only lockdown mode redirects; 'prices' keeps the catalog public.
         if (self::get_mode() !== 'redirect') {
             return;
         }
@@ -116,20 +134,14 @@ class WB2B_Access {
             return;
         }
 
-        // The auth page and any allowlisted page stay public.
+        // The auth surface and any allowlisted page stay public.
         if ($this->is_allowed_page()) {
             return;
         }
 
-        $auth_page_id = self::get_auth_page_id();
-        if (!$auth_page_id) {
-            // No auth page configured — fail open rather than trap the visitor.
-            return;
-        }
-
-        $target = get_permalink($auth_page_id);
+        $target = self::get_auth_url();
         if (!$target) {
-            // Auth page is missing/trashed — fail open rather than loop.
+            // No auth surface resolvable — fail open rather than trap the visitor.
             return;
         }
 

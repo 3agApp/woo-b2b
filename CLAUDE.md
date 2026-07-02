@@ -78,19 +78,31 @@ wrapper class:
 ## Access modes & pricing
 
 The storefront gate is driven by the **`wb2b_access_mode`** option, read through the single helper
-`WB2B_Access::get_mode()` (never read the option directly). Three values:
-- `redirect` (default) → full lock: `WB2B_Access::maybe_redirect()` sends guests/unapproved users to
-  the auth page, and locked pages get `noindex`.
-- `prices` → public catalog, but `WB2B_Pricing` hides prices and disables purchasing **for guests
-  only** (`!is_user_logged_in()`), showing a "Log in to see prices" link. No redirect, catalog stays
-  indexable.
-- `off` → no gate; stock WooCommerce behaviour.
+`WB2B_Access::get_mode()` (never read the option directly). Two values (the store is always gated in
+one of them; to disable entirely, deactivate the plugin):
+- `redirect` (default) → lockdown: `WB2B_Access::maybe_redirect()` sends guests to the auth surface,
+  and locked pages get `noindex`.
+- `prices` → public catalog, but `WB2B_Pricing` hides prices and disables purchasing for anyone
+  without access (`!WB2B_Customer::has_access()` — in practice guests, since unapproved users can't
+  log in), showing a "Log in to see prices" link. No redirect, catalog stays indexable.
 
-`get_mode()` falls back to the legacy boolean `wb2b_enabled` (true→`redirect`, false→`off`) so
-existing installs keep working before the option is saved. `WB2B_Pricing` only registers its
-WooCommerce filters (`woocommerce_get_price_html`, `woocommerce_is_purchasable`,
-`woocommerce_loop_add_to_cart_link`, …) while the mode is `prices`. To add a mode, extend the
-whitelist in both `WB2B_Admin::sanitize_access_mode()` and `WB2B_Access::get_mode()`.
+`get_mode()` defaults to `redirect`, so legacy installs (only the old `wb2b_enabled` set) stay gated.
+`WB2B_Pricing` only registers its WooCommerce filters (`woocommerce_get_price_html`,
+`woocommerce_is_purchasable`, `woocommerce_loop_add_to_cart_link`, …) while the mode is `prices`. To
+add a mode, extend the whitelist in both `WB2B_Admin::sanitize_access_mode()` and `get_mode()`.
+
+## Auth surface (single system on My Account)
+
+There is **one** auth surface: the WooCommerce **My Account** page. `WB2B_Auth` overrides the
+`myaccount/form-login.php` template (via the `wc_get_template` filter, which beats the theme's own
+override) so logged-out visitors see the plugin's unified login + custom B2B registration UI
+(`render_auth_page()`). Native WooCommerce/WoodMart **registration** is force-disabled on the front
+end (`option_woocommerce_enable_myaccount_registration` → `no`), so registration only ever happens
+through the custom form. **Login** stays native and is gated by `block_unapproved_login()` on the
+`authenticate` filter — unapproved (pending/rejected) users cannot log in on any path. Lockdown
+redirects and "Log in to see prices" links target `WB2B_Access::get_auth_url()` (My Account, falling
+back to the standalone `[woo_b2b_auth]` page, which is kept as a backward-compat alias). `b2b.css`/
+`b2b.js` load on both the account page (logged-out) and the shortcode page.
 
 ## Payments — Pay by Invoice
 

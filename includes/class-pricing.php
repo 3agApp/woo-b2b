@@ -29,7 +29,9 @@ class WB2B_Pricing {
     /**
      * Whether prices should be hidden for the current request.
      *
-     * Skips the backend (mirrors WB2B_Payments) and only acts for logged-out visitors.
+     * Skips the backend (mirrors WB2B_Payments) and hides from anyone without B2B access
+     * (guests + any non-approved user). In practice unapproved users can never be logged in,
+     * so this resolves to "logged-out visitors".
      *
      * @return bool
      */
@@ -38,33 +40,18 @@ class WB2B_Pricing {
             return false;
         }
 
-        return !is_user_logged_in();
+        return !WB2B_Customer::has_access(get_current_user_id());
     }
 
     /**
-     * Where the "Log in to see prices" links point.
-     *
-     * Prefers the configured auth page, then the My Account page, then wp-login.
+     * Where the "Log in to see prices" links point — the single auth surface (My Account),
+     * falling back to the standalone auth page, then wp-login.
      *
      * @return string
      */
     protected function login_url() {
-        $auth_page_id = WB2B_Access::get_auth_page_id();
-        if ($auth_page_id) {
-            $permalink = get_permalink($auth_page_id);
-            if ($permalink) {
-                return $permalink;
-            }
-        }
-
-        if (function_exists('wc_get_page_permalink')) {
-            $account = wc_get_page_permalink('myaccount');
-            if ($account) {
-                return $account;
-            }
-        }
-
-        return wp_login_url();
+        $url = WB2B_Access::get_auth_url();
+        return $url ? $url : wp_login_url();
     }
 
     /**

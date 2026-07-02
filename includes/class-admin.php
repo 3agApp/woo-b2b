@@ -181,7 +181,7 @@ class WB2B_Admin {
     }
 
     public function sanitize_access_mode($value) {
-        $allowed = ['redirect', 'prices', 'off'];
+        $allowed = ['redirect', 'prices'];
         $value   = sanitize_text_field($value);
         return in_array($value, $allowed, true) ? $value : 'redirect';
     }

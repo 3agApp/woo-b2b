@@ -19,6 +19,11 @@ class WB2B_Auth {
         add_action('admin_post_wb2b_login', [$this, 'process_login']);
         add_action('admin_post_nopriv_wb2b_register', [$this, 'process_register']);
         add_action('admin_post_wb2b_register', [$this, 'process_register']);
+
+        // Make the WooCommerce My Account page the single auth surface: render our unified
+        // login + custom B2B registration UI there, and suppress native registration everywhere.
+        add_filter('wc_get_template', [$this, 'override_login_template'], 20, 2);
+        add_filter('option_woocommerce_enable_myaccount_registration', [$this, 'force_disable_native_registration']);
     }
 
     /**
@@ -31,16 +36,54 @@ class WB2B_Auth {
     }
 
     /**
-     * Enqueue front-end assets on the auth page.
+     * Enqueue front-end assets where the auth UI renders: the standalone [woo_b2b_auth] page
+     * and the logged-out WooCommerce My Account page.
      */
     public function enqueue_assets() {
-        $auth_id = self::auth_page_id();
-        if ($auth_id && is_page($auth_id)) {
+        $auth_id         = self::auth_page_id();
+        $on_auth_page    = $auth_id && is_page($auth_id);
+        $on_account_page = function_exists('is_account_page') && is_account_page() && !is_user_logged_in();
+
+        if ($on_auth_page || $on_account_page) {
             $css = WB2B_PLUGIN_DIR . 'assets/css/b2b.css';
             $js  = WB2B_PLUGIN_DIR . 'assets/js/b2b.js';
             wp_enqueue_style('wb2b', WB2B_PLUGIN_URL . 'assets/css/b2b.css', [], file_exists($css) ? filemtime($css) : WB2B_VERSION);
             wp_enqueue_script('wb2b', WB2B_PLUGIN_URL . 'assets/js/b2b.js', [], file_exists($js) ? filemtime($js) : WB2B_VERSION, true);
         }
+    }
+
+    /**
+     * Swap WooCommerce's My Account login template for our unified login + B2B registration UI.
+     *
+     * Filters `wc_get_template`, which runs on the finally-located path — so this also overrides
+     * the active theme's (e.g. WoodMart's) form-login.php. Only applies to logged-out visitors;
+     * logged-in users see the normal My Account dashboard.
+     *
+     * @param string $template      Located template path.
+     * @param string $template_name Template name relative to the templates dir.
+     * @return string
+     */
+    public function override_login_template($template, $template_name) {
+        if ($template_name === 'myaccount/form-login.php' && !is_user_logged_in()) {
+            return WB2B_PLUGIN_DIR . 'includes/views/myaccount-auth.php';
+        }
+
+        return $template;
+    }
+
+    /**
+     * Force WooCommerce's native My Account registration off on the front end, so registration
+     * happens only through our custom B2B form. The WC admin setting still reads/saves normally.
+     *
+     * @param mixed $value Stored option value.
+     * @return mixed
+     */
+    public function force_disable_native_registration($value) {
+        if (is_admin() && !wp_doing_ajax()) {
+            return $value;
+        }
+
+        return 'no';
     }
 
     /**
@@ -438,10 +481,19 @@ class WB2B_Auth {
     }
 
     /**
-     * Redirect back to the auth page.
+     * Redirect back to the page the form was submitted from (My Account or the [woo_b2b_auth]
+     * page), so the flash notice renders wherever the auth UI lives.
      */
     protected function redirect_back() {
-        $url = get_permalink(self::auth_page_id());
+        $url     = '';
+        $referer = wp_get_referer();
+        if ($referer) {
+            $url = wp_validate_redirect($referer, '');
+        }
+
+        if (!$url) {
+            $url = WB2B_Access::get_auth_url();
+        }
         if (!$url) {
             $url = home_url('/');
         }
