@@ -58,11 +58,16 @@ dialogs and the `notice()` toast over native `window.confirm/prompt`.
 
 ## Settings / options
 
-Registered in `WB2B_Admin::register_settings()` under the **`wb2b_settings`** group and saved via
-core `options.php` (the form calls `settings_fields('wb2b_settings')`). To add a setting:
-`register_setting()` with a sanitizer callback → read it in `render_settings_page()` → pass it to
-`admin-settings.php` → render a field with existing classes (`.wb2b-form-row`, `.wb2b-label`,
-`.wb2b-select`/`.wb2b-input`). Read anywhere with `get_option('wb2b_*', <default>)`.
+The settings form (`admin-settings.php`, `#wb2b-settings-form`) does **not** post to core `options.php`.
+`admin.js` serializes the whole form and submits it via **AJAX** (`action=wb2b_save_settings`) to
+`WB2B_Ajax::save_settings()`, which calls `update_option()` **explicitly, one line per option**
+(sanitizing through the matching `WB2B_Admin::sanitize_*()` helper). So to add a setting you must
+touch **four** places: (1) `register_setting()` in `WB2B_Admin::register_settings()` with a sanitizer
+(kept for parity — it does *not* drive the save), (2) a matching `update_option('wb2b_*', …)` line in
+`WB2B_Ajax::save_settings()` — **omit this and the field silently reverts to its default on refresh**,
+(3) read it in `render_settings_page()` and pass it to `admin-settings.php`, (4) render the field with
+existing classes (`.wb2b-form-row`, `.wb2b-label`, `.wb2b-select`/`.wb2b-input`). Read anywhere with
+`get_option('wb2b_*', <default>)`.
 
 ## Auth page & skins
 

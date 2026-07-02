@@ -144,6 +144,7 @@ class WB2B_Ajax {
         update_option('wb2b_countries', $admin->sanitize_countries(isset($post['wb2b_countries']) ? $post['wb2b_countries'] : []));
         update_option('wb2b_doc_mimes', $admin->sanitize_mimes(isset($post['wb2b_doc_mimes']) ? $post['wb2b_doc_mimes'] : []));
         update_option('wb2b_auth_ui_style', $admin->sanitize_ui_style(isset($post['wb2b_auth_ui_style']) ? $post['wb2b_auth_ui_style'] : 'theme'));
+        update_option('wb2b_audience', $admin->sanitize_audience(isset($post['wb2b_audience']) ? $post['wb2b_audience'] : 'wholesale'));
 
         wp_send_json_success(['message' => __('Settings saved.', 'woo-b2b')]);
     }
