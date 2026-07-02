@@ -27,12 +27,31 @@ class WB2B_Access {
     }
 
     /**
+     * Current access mode: how the storefront is gated.
+     *
+     *  - 'redirect' — full lock; guests/unapproved users are sent to the auth page.
+     *  - 'prices'   — public catalog, but prices are hidden and purchasing disabled for guests.
+     *  - 'off'      — no B2B lock; the store behaves like stock WooCommerce.
+     *
+     * Falls back to the legacy `wb2b_enabled` boolean so existing installs keep their behaviour
+     * (true → 'redirect', false → 'off') until the option is saved from Settings.
+     *
+     * @return string
+     */
+    public static function get_mode() {
+        $legacy = get_option('wb2b_enabled', true) ? 'redirect' : 'off';
+        $mode   = get_option('wb2b_access_mode', $legacy);
+
+        return in_array($mode, ['redirect', 'prices', 'off'], true) ? $mode : 'redirect';
+    }
+
+    /**
      * Whether the current request should bypass the gate.
      *
      * @return bool
      */
     protected function is_bypassed() {
-        if (!get_option('wb2b_enabled', true)) {
+        if (self::get_mode() === 'off') {
             return true;
         }
 
@@ -84,6 +103,11 @@ class WB2B_Access {
      */
     public function maybe_redirect() {
         if ($this->is_bypassed()) {
+            return;
+        }
+
+        // Only the full-lock mode redirects; 'prices' keeps the catalog public.
+        if (self::get_mode() !== 'redirect') {
             return;
         }
 
@@ -163,6 +187,11 @@ class WB2B_Access {
      */
     public function noindex_when_locked($robots) {
         if ($this->is_bypassed()) {
+            return $robots;
+        }
+
+        // Only the full-lock mode hides pages behind a redirect; the 'prices' catalog stays indexable.
+        if (self::get_mode() !== 'redirect') {
             return $robots;
         }
 

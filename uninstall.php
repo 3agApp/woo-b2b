@@ -14,7 +14,8 @@ global $wpdb;
 
 // Delete plugin options.
 $options = [
-    'wb2b_enabled',
+    'wb2b_access_mode',
+    'wb2b_enabled', // legacy (superseded by wb2b_access_mode)
     'wb2b_auth_page_id',
     'wb2b_allowed_pages',
     'wb2b_auto_approve',

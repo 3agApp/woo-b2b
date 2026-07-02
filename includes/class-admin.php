@@ -123,7 +123,7 @@ class WB2B_Admin {
      * Register plugin settings.
      */
     public function register_settings() {
-        register_setting('wb2b_settings', 'wb2b_enabled', ['type' => 'boolean', 'sanitize_callback' => [$this, 'sanitize_bool'], 'default' => true]);
+        register_setting('wb2b_settings', 'wb2b_access_mode', ['type' => 'string', 'sanitize_callback' => [$this, 'sanitize_access_mode'], 'default' => 'redirect']);
         register_setting('wb2b_settings', 'wb2b_auto_approve', ['type' => 'boolean', 'sanitize_callback' => [$this, 'sanitize_bool'], 'default' => false]);
         register_setting('wb2b_settings', 'wb2b_require_documents', ['type' => 'boolean', 'sanitize_callback' => [$this, 'sanitize_bool'], 'default' => false]);
         register_setting('wb2b_settings', 'wb2b_auth_page_id', ['type' => 'integer', 'sanitize_callback' => 'absint', 'default' => 0]);
@@ -178,6 +178,12 @@ class WB2B_Admin {
         $allowed = ['theme', 'default'];
         $value   = sanitize_text_field($value);
         return in_array($value, $allowed, true) ? $value : 'theme';
+    }
+
+    public function sanitize_access_mode($value) {
+        $allowed = ['redirect', 'prices', 'off'];
+        $value   = sanitize_text_field($value);
+        return in_array($value, $allowed, true) ? $value : 'redirect';
     }
 
     /* ----- Pages ----- */
@@ -243,7 +249,7 @@ class WB2B_Admin {
      * Render the settings page.
      */
     public function render_settings_page() {
-        $enabled           = (bool) get_option('wb2b_enabled', true);
+        $access_mode       = WB2B_Access::get_mode();
         $auto_approve      = (bool) get_option('wb2b_auto_approve', false);
         $require_documents = (bool) get_option('wb2b_require_documents', false);
         $auth_page_id      = (int) get_option('wb2b_auth_page_id', 0);

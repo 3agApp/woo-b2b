@@ -133,7 +133,7 @@ class WB2B_Ajax {
 
         $post = wp_unslash($_POST);
 
-        update_option('wb2b_enabled', $admin->sanitize_bool(isset($post['wb2b_enabled']) ? $post['wb2b_enabled'] : 0));
+        update_option('wb2b_access_mode', $admin->sanitize_access_mode(isset($post['wb2b_access_mode']) ? $post['wb2b_access_mode'] : 'redirect'));
         update_option('wb2b_auto_approve', $admin->sanitize_bool(isset($post['wb2b_auto_approve']) ? $post['wb2b_auto_approve'] : 0));
         update_option('wb2b_require_documents', $admin->sanitize_bool(isset($post['wb2b_require_documents']) ? $post['wb2b_require_documents'] : 0));
         update_option('wb2b_auth_page_id', isset($post['wb2b_auth_page_id']) ? absint($post['wb2b_auth_page_id']) : 0);

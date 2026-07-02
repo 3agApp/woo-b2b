@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ They are stored as private attachments and linked from the customer row on the a
 The interface is English for now. All strings are translation-ready (text domain `woo-b2b`).
 
 == Changelog ==
+
+= 1.3.0 =
+* New **Access mode** setting replacing the on/off B2B lock: choose **Full lock** (redirect guests to login), **Show catalog, hide prices** (guests can browse products but prices are hidden and purchasing is disabled until they log in), or **Off** (public store).
+* In "Show catalog, hide prices" mode, guests see a "Log in to see prices" link in place of prices and Add to Cart; approved customers and admins see prices as normal.
+* Existing sites are migrated automatically: the previous "enabled" lock maps to Full lock, "disabled" maps to Off.
 
 = 1.2.0 =
 * New **Pay by Invoice** payment method for approved B2B customers: orders are placed on account (on-hold) and settled later against an invoice.

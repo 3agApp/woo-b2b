@@ -15,8 +15,8 @@ a WoodMart-theme store.
   the global `WB2B()`, and an SPL autoloader: **`WB2B_Foo_Bar` → `includes/class-foo-bar.php`**.
 - **Components** (instantiated on `plugins_loaded`, after a WooCommerce check): `WB2B_Logs`,
   `WB2B_Customer`, `WB2B_Emails`, `WB2B_Access`, `WB2B_Auth`, `WB2B_Ajax`, `WB2B_License`,
-  `WB2B_Updater`, `WB2B_Payments`, and `WB2B_Admin` (admin requests only). Reach them via
-  `WB2B()->emails`, `WB2B()->license`, etc.
+  `WB2B_Updater`, `WB2B_Payments`, `WB2B_Pricing`, and `WB2B_Admin` (admin requests only). Reach them
+  via `WB2B()->emails`, `WB2B()->license`, etc.
 - **Customer status** lives in user meta `wb2b_status` = `pending|approved|rejected` (see
   `WB2B_Customer` constants/helpers). Addresses map to native WooCommerce billing/shipping meta.
 
@@ -74,6 +74,23 @@ wrapper class:
   plugin's own value as a `var()` fallback — so it degrades to the default look on non-WoodMart
   themes. Add new themes as more `wb2b-skin--*` blocks + a whitelist value in `sanitize_ui_style()`.
 - `default` → the plugin's self-contained palette (no remap).
+
+## Access modes & pricing
+
+The storefront gate is driven by the **`wb2b_access_mode`** option, read through the single helper
+`WB2B_Access::get_mode()` (never read the option directly). Three values:
+- `redirect` (default) → full lock: `WB2B_Access::maybe_redirect()` sends guests/unapproved users to
+  the auth page, and locked pages get `noindex`.
+- `prices` → public catalog, but `WB2B_Pricing` hides prices and disables purchasing **for guests
+  only** (`!is_user_logged_in()`), showing a "Log in to see prices" link. No redirect, catalog stays
+  indexable.
+- `off` → no gate; stock WooCommerce behaviour.
+
+`get_mode()` falls back to the legacy boolean `wb2b_enabled` (true→`redirect`, false→`off`) so
+existing installs keep working before the option is saved. `WB2B_Pricing` only registers its
+WooCommerce filters (`woocommerce_get_price_html`, `woocommerce_is_purchasable`,
+`woocommerce_loop_add_to_cart_link`, …) while the mode is `prices`. To add a mode, extend the
+whitelist in both `WB2B_Admin::sanitize_access_mode()` and `WB2B_Access::get_mode()`.
 
 ## Payments — Pay by Invoice
 

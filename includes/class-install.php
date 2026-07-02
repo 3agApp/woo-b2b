@@ -18,7 +18,7 @@ class WB2B_Install {
      */
     public static function default_options() {
         return [
-            'wb2b_enabled'           => true,
+            'wb2b_access_mode'       => 'redirect',
             'wb2b_auth_page_id'      => 0,
             'wb2b_allowed_pages'     => [],
             'wb2b_auto_approve'      => false,
