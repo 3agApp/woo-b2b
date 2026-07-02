@@ -3,7 +3,7 @@
  * Plugin Name: Woo B2B
  * Plugin URI: https://3ag.app/products/woo-b2b
  * Description: Turn a WooCommerce store into a B2B-only shop — hide the catalog from guests, gate the whole site behind login, and require admin approval before new customers can browse or order.
- * Version: 1.4.1
+ * Version: 1.4.2
  * Author: 3AG
  * Author URI: https://3ag.app
  * License: GPL v2 or later
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin constants
-define('WB2B_VERSION', '1.4.1');
+define('WB2B_VERSION', '1.4.2');
 define('WB2B_PLUGIN_FILE', __FILE__);
 define('WB2B_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WB2B_PLUGIN_URL', plugin_dir_url(__FILE__));

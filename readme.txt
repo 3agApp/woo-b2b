@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ They are stored as private attachments and linked from the customer row on the a
 The interface ships in English and German (`de_DE`). All strings are translation-ready (text domain `woo-b2b`); a `woo-b2b.pot` template is included for adding further languages.
 
 == Changelog ==
+
+= 1.4.2 =
+* Fixed: the bundled translations (including the German `de_DE` login/registration strings) were missing from the release package, so the storefront login card showed English even when the site language was German. The `languages/` folder is now included in the release build.
 
 = 1.4.1 =
 * New **Access mode** setting replacing the on/off B2B lock: choose **Lockdown** (redirect guests to the account page) or **Show catalog, hide prices** (guests can browse products but prices are hidden and purchasing is disabled until they log in).
