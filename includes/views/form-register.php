@@ -3,7 +3,7 @@
  * Registration form partial.
  *
  * Shares scope with auth-page.php ($action_url, $redirect_to, $countries,
- * $salutations, $old, $val).
+ * $salutations, $old, $val, $copy).
  */
 
 if (!defined('ABSPATH')) {
@@ -44,7 +44,7 @@ $render_country = function ($name, $id, $current, $required = true) use ($countr
 ?>
 <div class="wb2b-card wb2b-card--register">
     <h2 class="wb2b-card__title"><?php esc_html_e('I am a new customer', 'woo-b2b'); ?></h2>
-    <p class="wb2b-card__intro"><?php esc_html_e('Register a business account. Your account will be reviewed by our team before it is activated.', 'woo-b2b'); ?></p>
+    <p class="wb2b-card__intro"><?php echo esc_html($copy['register_intro']); ?></p>
 
     <form class="wb2b-form wb2b-form--register" action="<?php echo $action_url; ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="wb2b_register">
@@ -81,7 +81,7 @@ $render_country = function ($name, $id, $current, $required = true) use ($countr
 
             <div class="wb2b-row">
                 <p class="wb2b-field wb2b-col-12">
-                    <label for="wb2b-company"><?php esc_html_e('Company', 'woo-b2b'); ?> *</label>
+                    <label for="wb2b-company"><?php echo esc_html($copy['company_label']); ?> *</label>
                     <input type="text" id="wb2b-company" class="wb2b-input" name="company" value="<?php echo esc_attr($val('company')); ?>" required>
                 </p>
             </div>
@@ -188,7 +188,7 @@ $render_country = function ($name, $id, $current, $required = true) use ($countr
 
             <div class="wb2b-row">
                 <p class="wb2b-field wb2b-col-6">
-                    <label for="wb2b-ship-company"><?php esc_html_e('Company', 'woo-b2b'); ?> *</label>
+                    <label for="wb2b-ship-company"><?php echo esc_html($copy['company_label']); ?> *</label>
                     <input type="text" id="wb2b-ship-company" class="wb2b-input wb2b-ship-input" name="shipping_company" value="<?php echo esc_attr($val('shipping_company')); ?>">
                 </p>
                 <p class="wb2b-field wb2b-col-6">
@@ -236,8 +236,7 @@ $render_country = function ($name, $id, $current, $required = true) use ($countr
             <p class="wb2b-help">
                 <?php
                 printf(
-                    /* translators: 1: allowed file types, 2: max size in MB */
-                    esc_html__('Upload supporting documents (e.g. trade licence). Allowed: %1$s, up to %2$d MB each.', 'woo-b2b'),
+                    esc_html($copy['doc_hint']),
                     esc_html(strtoupper(implode(', ', $doc_exts))),
                     (int) $max_mb
                 );

@@ -111,10 +111,49 @@ class WB2B_Auth {
         $countries   = $this->get_country_options();
         $salutations = WB2B_Customer::get_salutations();
         $old         = isset($flash['input']) && is_array($flash['input']) ? $flash['input'] : [];
+        $copy        = self::get_copy();
 
         ob_start();
         include WB2B_PLUGIN_DIR . 'includes/views/auth-page.php';
         return ob_get_clean();
+    }
+
+    /**
+     * Audience-dependent copy for the auth page.
+     *
+     * Returns the strings that differ between the "wholesale" and "education"
+     * audiences (selected via the wb2b_audience option). Strings shared by both
+     * audiences stay inline in the views. The wholesale set reuses the original
+     * source strings so their existing translations remain valid.
+     *
+     * @return array<string,string>
+     */
+    public static function get_copy() {
+        $audience = get_option('wb2b_audience', 'wholesale');
+
+        if ($audience === 'education') {
+            return [
+                'eyebrow'         => __('Education portal', 'woo-b2b'),
+                'hero_title'      => __('Institutional account access', 'woo-b2b'),
+                'hero_subtitle'   => __('Sign in to your institution\'s account, or register to apply for access. New accounts are reviewed by our team before activation.', 'woo-b2b'),
+                'benefit_pricing' => __('Institutional pricing once approved', 'woo-b2b'),
+                'register_intro'  => __('Register an account for your institution. Your account will be reviewed by our team before it is activated.', 'woo-b2b'),
+                'company_label'   => __('Institution', 'woo-b2b'),
+                /* translators: 1: allowed file types, 2: max size in MB */
+                'doc_hint'        => __('Upload supporting documents (e.g. proof of institutional status). Allowed: %1$s, up to %2$d MB each.', 'woo-b2b'),
+            ];
+        }
+
+        return [
+            'eyebrow'         => __('Wholesale portal', 'woo-b2b'),
+            'hero_title'      => __('Trade account access', 'woo-b2b'),
+            'hero_subtitle'   => __('Sign in to your business account, or register to apply for wholesale access. New accounts are reviewed by our team before activation.', 'woo-b2b'),
+            'benefit_pricing' => __('Wholesale pricing once approved', 'woo-b2b'),
+            'register_intro'  => __('Register a business account. Your account will be reviewed by our team before it is activated.', 'woo-b2b'),
+            'company_label'   => __('Company', 'woo-b2b'),
+            /* translators: 1: allowed file types, 2: max size in MB */
+            'doc_hint'        => __('Upload supporting documents (e.g. trade licence). Allowed: %1$s, up to %2$d MB each.', 'woo-b2b'),
+        ];
     }
 
     /**

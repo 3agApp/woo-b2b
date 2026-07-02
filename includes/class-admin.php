@@ -134,6 +134,7 @@ class WB2B_Admin {
         register_setting('wb2b_settings', 'wb2b_countries', ['type' => 'array', 'sanitize_callback' => [$this, 'sanitize_countries'], 'default' => ['CH', 'LI']]);
         register_setting('wb2b_settings', 'wb2b_doc_mimes', ['type' => 'array', 'sanitize_callback' => [$this, 'sanitize_mimes'], 'default' => ['pdf', 'jpg', 'jpeg', 'png']]);
         register_setting('wb2b_settings', 'wb2b_auth_ui_style', ['type' => 'string', 'sanitize_callback' => [$this, 'sanitize_ui_style'], 'default' => 'theme']);
+        register_setting('wb2b_settings', 'wb2b_audience', ['type' => 'string', 'sanitize_callback' => [$this, 'sanitize_audience'], 'default' => 'wholesale']);
     }
 
     /* ----- Sanitizers ----- */
@@ -184,6 +185,12 @@ class WB2B_Admin {
         $allowed = ['redirect', 'prices'];
         $value   = sanitize_text_field($value);
         return in_array($value, $allowed, true) ? $value : 'redirect';
+    }
+
+    public function sanitize_audience($value) {
+        $allowed = ['wholesale', 'education'];
+        $value   = sanitize_text_field($value);
+        return in_array($value, $allowed, true) ? $value : 'wholesale';
     }
 
     /* ----- Pages ----- */
@@ -260,6 +267,7 @@ class WB2B_Admin {
         $min_password      = (int) get_option('wb2b_min_password', 8);
         $admin_email       = get_option('wb2b_admin_email', get_option('admin_email'));
         $auth_ui_style     = get_option('wb2b_auth_ui_style', 'theme');
+        $audience          = get_option('wb2b_audience', 'wholesale');
 
         $all_countries = (function_exists('WC') && WC()->countries) ? WC()->countries->get_countries() : [];
 

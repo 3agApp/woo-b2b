@@ -75,6 +75,14 @@ wrapper class:
   themes. Add new themes as more `wb2b-skin--*` blocks + a whitelist value in `sanitize_ui_style()`.
 - `default` → the plugin's self-contained palette (no remap).
 
+The **`wb2b_audience`** option swaps the audience-dependent wording (hero eyebrow/title/subtitle,
+the pricing benefit, register intro, the "Company" field label, and the document hint) between
+`wholesale` (default) and `education`. The copy lives in `WB2B_Auth::get_copy()` — an array keyed by
+audience whose strings are all wrapped in `__()`; the views echo `$copy['...']` instead of inlining
+those strings. The `wholesale` set reuses the original source strings so existing translations stay
+valid. To add an audience: extend `get_copy()` + the `sanitize_audience()` whitelist + the settings
+`<select>`, and add the new strings to `languages/woo-b2b.pot` and each `.po`/`.mo`.
+
 ## Access modes & pricing
 
 The storefront gate is driven by the **`wb2b_access_mode`** option, read through the single helper

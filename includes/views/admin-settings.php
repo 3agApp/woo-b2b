@@ -13,6 +13,7 @@
  * @var int    $min_password
  * @var string $admin_email
  * @var string $auth_ui_style
+ * @var string $audience
  * @var array  $all_countries
  */
 
@@ -87,6 +88,14 @@ $doc_mimes_lower = array_map('strtolower', (array) $doc_mimes);
                 <h2><span class="dashicons dashicons-admin-customizer"></span> <?php esc_html_e('Appearance', 'woo-b2b'); ?></h2>
             </div>
             <div class="wb2b-card-body">
+                <div class="wb2b-form-row">
+                    <label class="wb2b-label" for="wb2b_audience"><?php esc_html_e('Store audience', 'woo-b2b'); ?></label>
+                    <select name="wb2b_audience" id="wb2b_audience" class="wb2b-select wb2b-input-wide">
+                        <option value="wholesale" <?php selected($audience, 'wholesale'); ?>><?php esc_html_e('Wholesale (businesses)', 'woo-b2b'); ?></option>
+                        <option value="education" <?php selected($audience, 'education'); ?>><?php esc_html_e('Education (institutions)', 'woo-b2b'); ?></option>
+                    </select>
+                    <p class="wb2b-help-text"><?php esc_html_e('Switches the login and registration wording between a wholesale/trade audience and educational institutions.', 'woo-b2b'); ?></p>
+                </div>
                 <div class="wb2b-form-row">
                     <label class="wb2b-label" for="wb2b_auth_ui_style"><?php esc_html_e('Authentication page style', 'woo-b2b'); ?></label>
                     <select name="wb2b_auth_ui_style" id="wb2b_auth_ui_style" class="wb2b-select wb2b-input-wide">

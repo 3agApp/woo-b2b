@@ -1266,3 +1266,65 @@ msgstr "Updates werden von %s bezogen"
 #: woo-b2b.php:164
 msgid "Woo B2B requires WooCommerce to be installed and active."
 msgstr "Woo B2B erfordert, dass WooCommerce installiert und aktiv ist."
+
+#: includes/views/admin-settings.php:92
+msgid "Store audience"
+msgstr "Shop-Zielgruppe"
+
+#: includes/views/admin-settings.php:94
+msgid "Wholesale (businesses)"
+msgstr "Großhandel (Unternehmen)"
+
+#: includes/views/admin-settings.php:95
+msgid "Education (institutions)"
+msgstr "Bildung (Institutionen)"
+
+#: includes/views/admin-settings.php:97
+msgid ""
+"Switches the login and registration wording between a wholesale/trade "
+"audience and educational institutions."
+msgstr ""
+"Wechselt die Texte auf der Login- und Registrierungsseite zwischen einer "
+"Großhandels-/Geschäftszielgruppe und Bildungseinrichtungen."
+
+#: includes/class-auth.php:136
+msgid "Education portal"
+msgstr "Bildungsportal"
+
+#: includes/class-auth.php:137
+msgid "Institutional account access"
+msgstr "Zugang zum Institutionskonto"
+
+#: includes/class-auth.php:138
+msgid ""
+"Sign in to your institution's account, or register to apply for access. New "
+"accounts are reviewed by our team before activation."
+msgstr ""
+"Melden Sie sich beim Konto Ihrer Institution an oder registrieren Sie sich, "
+"um Zugang zu beantragen. Neue Konten werden vor der Aktivierung von unserem "
+"Team geprüft."
+
+#: includes/class-auth.php:139
+msgid "Institutional pricing once approved"
+msgstr "Institutionspreise nach Freigabe"
+
+#: includes/class-auth.php:140
+msgid ""
+"Register an account for your institution. Your account will be reviewed by "
+"our team before it is activated."
+msgstr ""
+"Registrieren Sie ein Konto für Ihre Institution. Ihr Konto wird vor der "
+"Aktivierung von unserem Team geprüft."
+
+#: includes/class-auth.php:141
+msgid "Institution"
+msgstr "Institution"
+
+#: includes/class-auth.php:143
+#, php-format
+msgid ""
+"Upload supporting documents (e.g. proof of institutional status). Allowed: "
+"%1$s, up to %2$d MB each."
+msgstr ""
+"Laden Sie Nachweisdokumente hoch (z. B. Nachweis der Bildungseinrichtung). "
+"Erlaubt: %1$s, je bis zu %2$d MB."
