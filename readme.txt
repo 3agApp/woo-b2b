@@ -55,7 +55,7 @@ Yes. Turn off **Enable B2B lock** under **B2B Customers → Settings**.
 They are stored as private attachments and linked from the customer row on the approvals screen.
 
 = Does it support multiple languages? =
-The interface is English for now. All strings are translation-ready (text domain `woo-b2b`).
+The interface ships in English and German (`de_DE`). All strings are translation-ready (text domain `woo-b2b`); a `woo-b2b.pot` template is included for adding further languages.
 
 == Changelog ==
 
@@ -64,6 +64,7 @@ The interface is English for now. All strings are translation-ready (text domain
 * In "Show catalog, hide prices" mode, guests see a "Log in to see prices" link in place of prices and Add to Cart; approved customers and admins see prices as normal.
 * **Single sign-in surface:** login and the custom B2B registration now live on the WooCommerce My Account page. Native WooCommerce/theme registration is disabled so new customers always register through the approval form; login stays gated (unapproved accounts cannot sign in).
 * Existing sites are migrated automatically to Lockdown mode.
+* Added a **German** translation (`de_DE`) and a `woo-b2b.pot` template for further languages.
 
 = 1.2.0 =
 * New **Pay by Invoice** payment method for approved B2B customers: orders are placed on account (on-hold) and settled later against an invoice.

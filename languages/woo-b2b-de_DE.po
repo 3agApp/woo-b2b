@@ -1,0 +1,1268 @@
+# German (Germany) translation for Woo B2B.
+# Copyright (C) 2026 3AG
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Woo B2B 1.4.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-b2b\n"
+"PO-Revision-Date: 2026-07-02 19:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: woo-b2b\n"
+
+#. Plugin Name of the plugin
+#: woo-b2b.php
+msgid "Woo B2B"
+msgstr "Woo B2B"
+
+#. Plugin URI of the plugin
+#: woo-b2b.php
+msgid "https://3ag.app/products/woo-b2b"
+msgstr "https://3ag.app/products/woo-b2b"
+
+#. Description of the plugin
+#: woo-b2b.php
+msgid "Turn a WooCommerce store into a B2B-only shop — hide the catalog from guests, gate the whole site behind login, and require admin approval before new customers can browse or order."
+msgstr "Verwandeln Sie einen WooCommerce-Shop in einen reinen B2B-Shop – verbergen Sie den Katalog vor Gästen, sichern Sie die gesamte Website hinter einer Anmeldung und verlangen Sie eine Admin-Freigabe, bevor neue Kunden stöbern oder bestellen können."
+
+#. Author of the plugin
+#: woo-b2b.php
+msgid "3AG"
+msgstr "3AG"
+
+#. Author URI of the plugin
+#: woo-b2b.php
+msgid "https://3ag.app"
+msgstr "https://3ag.app"
+
+#: includes/class-access.php:180
+msgid "Your account is awaiting approval. We will email you once it has been reviewed."
+msgstr "Ihr Konto wartet auf Freigabe. Wir benachrichtigen Sie per E-Mail, sobald es geprüft wurde."
+
+#: includes/class-access.php:187
+msgid "Your registration was not approved. Please contact us for more information."
+msgstr "Ihre Registrierung wurde nicht genehmigt. Bitte kontaktieren Sie uns für weitere Informationen."
+
+#: includes/class-admin.php:38
+#: includes/class-admin.php:44
+#: includes/views/admin-approvals.php:48
+msgid "B2B Customers"
+msgstr "B2B-Kunden"
+
+#: includes/class-admin.php:55
+#: includes/class-admin.php:56
+msgid "Customers"
+msgstr "Kunden"
+
+#: includes/class-admin.php:64
+#: includes/class-admin.php:65
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: includes/class-admin.php:73
+#: includes/class-admin.php:74
+#: includes/views/license.php:55
+msgid "License"
+msgstr "Lizenz"
+
+#: includes/class-admin.php:100
+msgid "Approve this customer?"
+msgstr "Diesen Kunden freigeben?"
+
+#: includes/class-admin.php:101
+msgid "Reason for rejection (optional, included in the email):"
+msgstr "Grund für die Ablehnung (optional, wird in die E-Mail aufgenommen):"
+
+#: includes/class-admin.php:102
+msgid "Working…"
+msgstr "Wird bearbeitet …"
+
+#: includes/class-admin.php:103
+msgid "Something went wrong. Please try again."
+msgstr "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+
+#: includes/class-admin.php:104
+msgid "Deactivate the license on this domain?"
+msgstr "Die Lizenz auf dieser Domain deaktivieren?"
+
+#: includes/class-admin.php:105
+msgid "Download and install the update now? The plugin will briefly deactivate."
+msgstr "Update jetzt herunterladen und installieren? Das Plugin wird kurzzeitig deaktiviert."
+
+#: includes/class-admin.php:107
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: includes/class-admin.php:108
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: includes/class-admin.php:109
+msgid "Approve customer"
+msgstr "Kunde freigeben"
+
+#: includes/class-admin.php:110
+#: includes/views/admin-approvals.php:218
+msgid "Approve"
+msgstr "Freigeben"
+
+#: includes/class-admin.php:111
+msgid "Reject customer"
+msgstr "Kunde ablehnen"
+
+#: includes/class-admin.php:112
+#: includes/views/admin-approvals.php:221
+msgid "Reject"
+msgstr "Ablehnen"
+
+#: includes/class-admin.php:113
+msgid "Deactivate license"
+msgstr "Lizenz deaktivieren"
+
+#: includes/class-admin.php:114
+msgid "Deactivate"
+msgstr "Deaktivieren"
+
+#: includes/class-admin.php:115
+msgid "Install update"
+msgstr "Update installieren"
+
+#: includes/class-admin.php:116
+msgid "Update now"
+msgstr "Jetzt aktualisieren"
+
+#: includes/class-admin.php:117
+#, php-format
+msgid "Approve %d selected customer(s)?"
+msgstr "%d ausgewählte(n) Kunden freigeben?"
+
+#: includes/class-admin.php:284
+msgid "B2B status"
+msgstr "B2B-Status"
+
+#: includes/class-admin.php:309
+msgid "Approve (B2B)"
+msgstr "Freigeben (B2B)"
+
+#: includes/class-admin.php:312
+msgid "Reject (B2B)"
+msgstr "Ablehnen (B2B)"
+
+#: includes/class-admin.php:336
+msgid "You are not allowed to do this."
+msgstr "Sie sind nicht berechtigt, dies zu tun."
+
+#: includes/class-ajax.php:34
+msgid "Security check failed."
+msgstr "Sicherheitsprüfung fehlgeschlagen."
+
+#: includes/class-ajax.php:37
+msgid "Permission denied."
+msgstr "Zugriff verweigert."
+
+#: includes/class-ajax.php:49
+#: includes/class-ajax.php:72
+msgid "Invalid user."
+msgstr "Ungültiger Benutzer."
+
+#: includes/class-ajax.php:56
+msgid "Customer approved."
+msgstr "Kunde freigegeben."
+
+#: includes/class-ajax.php:79
+msgid "Customer rejected."
+msgstr "Kunde abgelehnt."
+
+#: includes/class-ajax.php:97
+msgid "Nothing to do."
+msgstr "Nichts zu tun."
+
+#. translators: %d: number of customers updated
+#: includes/class-ajax.php:118
+#, php-format
+msgid "%d customer updated."
+msgid_plural "%d customers updated."
+msgstr[0] "%d Kunde aktualisiert."
+msgstr[1] "%d Kunden aktualisiert."
+
+#: includes/class-ajax.php:131
+msgid "Settings handler unavailable."
+msgstr "Einstellungs-Handler nicht verfügbar."
+
+#: includes/class-ajax.php:148
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+#: includes/class-ajax.php:161
+msgid "Please enter a license key."
+msgstr "Bitte geben Sie einen Lizenzschlüssel ein."
+
+#: includes/class-ajax.php:168
+msgid "License activated successfully!"
+msgstr "Lizenz erfolgreich aktiviert!"
+
+#: includes/class-ajax.php:174
+#: includes/class-ajax.php:199
+msgid "Activation failed."
+msgstr "Aktivierung fehlgeschlagen."
+
+#: includes/class-ajax.php:186
+msgid "No license key found. Please enter a license key."
+msgstr "Kein Lizenzschlüssel gefunden. Bitte geben Sie einen Lizenzschlüssel ein."
+
+#: includes/class-ajax.php:193
+msgid "Domain activated successfully!"
+msgstr "Domain erfolgreich aktiviert!"
+
+#: includes/class-ajax.php:212
+msgid "License deactivated."
+msgstr "Lizenz deaktiviert."
+
+#: includes/class-ajax.php:227
+msgid "License verified."
+msgstr "Lizenz verifiziert."
+
+#: includes/class-ajax.php:235
+msgid "License check failed."
+msgstr "Lizenzprüfung fehlgeschlagen."
+
+#. translators: %s: new version
+#: includes/class-ajax.php:256
+#, php-format
+msgid "Update available! Version %s is ready to install."
+msgstr "Update verfügbar! Version %s kann installiert werden."
+
+#: includes/class-ajax.php:264
+msgid "You are running the latest version."
+msgstr "Sie verwenden die neueste Version."
+
+#: includes/class-ajax.php:277
+msgid "No update available or download URL missing."
+msgstr "Kein Update verfügbar oder Download-URL fehlt."
+
+#: includes/class-ajax.php:294
+msgid "Update failed. Please try again or update manually."
+msgstr "Update fehlgeschlagen. Bitte versuchen Sie es erneut oder aktualisieren Sie manuell."
+
+#. translators: %s: new version
+#: includes/class-ajax.php:305
+#, php-format
+msgid "Successfully updated to version %s. Please refresh the page."
+msgstr "Erfolgreich auf Version %s aktualisiert. Bitte laden Sie die Seite neu."
+
+#: includes/class-auth.php:103
+msgid "You are logged in."
+msgstr "Sie sind angemeldet."
+
+#: includes/class-auth.php:104
+msgid "Continue to the shop"
+msgstr "Weiter zum Shop"
+
+#: includes/class-auth.php:105
+msgid "Log out"
+msgstr "Abmelden"
+
+#: includes/class-auth.php:130
+msgid "Please enter your email and password."
+msgstr "Bitte geben Sie Ihre E-Mail-Adresse und Ihr Passwort ein."
+
+#: includes/class-auth.php:176
+msgid "Please upload at least one document."
+msgstr "Bitte laden Sie mindestens ein Dokument hoch."
+
+#: includes/class-auth.php:200
+msgid "Thank you! Your account has been created. You can now log in."
+msgstr "Vielen Dank! Ihr Konto wurde erstellt. Sie können sich jetzt anmelden."
+
+#: includes/class-auth.php:201
+msgid "Thank you! Your registration has been received and is awaiting approval. We will email you once your account is activated."
+msgstr "Vielen Dank! Ihre Registrierung ist eingegangen und wartet auf Freigabe. Wir benachrichtigen Sie per E-Mail, sobald Ihr Konto aktiviert wurde."
+
+#: includes/class-auth.php:263
+#: includes/views/form-register.php:73
+#: includes/views/form-register.php:180
+msgid "First name"
+msgstr "Vorname"
+
+#: includes/class-auth.php:264
+#: includes/views/form-register.php:77
+#: includes/views/form-register.php:184
+msgid "Last name"
+msgstr "Nachname"
+
+#: includes/class-auth.php:265
+#: includes/class-emails.php:192
+#: includes/views/admin-approvals.php:154
+#: includes/views/form-register.php:84
+#: includes/views/form-register.php:191
+msgid "Company"
+msgstr "Firma"
+
+#: includes/class-auth.php:266
+#: includes/views/form-login.php:22
+#: includes/views/form-register.php:102
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+#: includes/class-auth.php:267
+#: includes/views/form-register.php:129
+#: includes/views/form-register.php:202
+msgid "Street and house number"
+msgstr "Straße und Hausnummer"
+
+#: includes/class-auth.php:268
+#: includes/views/form-register.php:133
+#: includes/views/form-register.php:206
+msgid "Postcode"
+msgstr "Postleitzahl"
+
+#: includes/class-auth.php:269
+#: includes/views/form-register.php:140
+#: includes/views/form-register.php:213
+msgid "City"
+msgstr "Ort"
+
+#: includes/class-auth.php:270
+#: includes/class-emails.php:197
+#: includes/views/form-register.php:151
+#: includes/views/form-register.php:224
+msgid "Country"
+msgstr "Land"
+
+#. translators: %s: field label
+#: includes/class-auth.php:275
+#: includes/class-auth.php:318
+#, php-format
+msgid "%s is required."
+msgstr "%s ist erforderlich."
+
+#: includes/class-auth.php:280
+msgid "Please enter a valid email address."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+
+#: includes/class-auth.php:283
+msgid "The email addresses do not match."
+msgstr "Die E-Mail-Adressen stimmen nicht überein."
+
+#: includes/class-auth.php:286
+#: includes/class-customer.php:158
+msgid "An account with this email address already exists."
+msgstr "Ein Konto mit dieser E-Mail-Adresse existiert bereits."
+
+#. translators: %d: minimum password length
+#: includes/class-auth.php:291
+#, php-format
+msgid "The password must be at least %d characters long."
+msgstr "Das Passwort muss mindestens %d Zeichen lang sein."
+
+#: includes/class-auth.php:294
+msgid "The passwords do not match."
+msgstr "Die Passwörter stimmen nicht überein."
+
+#: includes/class-auth.php:298
+msgid "Please select a valid country."
+msgstr "Bitte wählen Sie ein gültiges Land."
+
+#: includes/class-auth.php:302
+msgid "You must accept the data protection terms."
+msgstr "Sie müssen den Datenschutzbestimmungen zustimmen."
+
+#: includes/class-auth.php:307
+msgid "Shipping first name"
+msgstr "Vorname (Lieferadresse)"
+
+#: includes/class-auth.php:308
+msgid "Shipping last name"
+msgstr "Nachname (Lieferadresse)"
+
+#: includes/class-auth.php:309
+msgid "Shipping company"
+msgstr "Firma (Lieferadresse)"
+
+#: includes/class-auth.php:310
+msgid "Shipping street and house number"
+msgstr "Straße und Hausnummer (Lieferadresse)"
+
+#: includes/class-auth.php:311
+msgid "Shipping postcode"
+msgstr "Postleitzahl (Lieferadresse)"
+
+#: includes/class-auth.php:312
+msgid "Shipping city"
+msgstr "Ort (Lieferadresse)"
+
+#: includes/class-auth.php:313
+msgid "Shipping country"
+msgstr "Land (Lieferadresse)"
+
+#: includes/class-auth.php:322
+msgid "Please select a valid shipping country."
+msgstr "Bitte wählen Sie ein gültiges Land für die Lieferadresse."
+
+#: includes/class-auth.php:358
+msgid "One of the documents could not be uploaded. Please try again."
+msgstr "Eines der Dokumente konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut."
+
+#. translators: %d: maximum file size in megabytes
+#: includes/class-auth.php:363
+#, php-format
+msgid "Each document must be %d MB or smaller."
+msgstr "Jedes Dokument darf höchstens %d MB groß sein."
+
+#: includes/class-auth.php:368
+msgid "Only PDF, JPG and PNG documents are allowed."
+msgstr "Es sind nur PDF-, JPG- und PNG-Dokumente erlaubt."
+
+#: includes/class-auth.php:455
+msgid "Security check failed. Please go back and try again."
+msgstr "Sicherheitsprüfung fehlgeschlagen. Bitte gehen Sie zurück und versuchen Sie es erneut."
+
+#: includes/class-customer.php:43
+#: includes/views/admin-approvals.php:58
+msgid "Pending"
+msgstr "Ausstehend"
+
+#: includes/class-customer.php:44
+#: includes/views/admin-approvals.php:59
+msgid "Approved"
+msgstr "Freigegeben"
+
+#: includes/class-customer.php:45
+#: includes/views/admin-approvals.php:60
+msgid "Rejected"
+msgstr "Abgelehnt"
+
+#: includes/class-customer.php:67
+msgid "Not specified"
+msgstr "Keine Angabe"
+
+#: includes/class-customer.php:68
+msgid "Mrs"
+msgstr "Frau"
+
+#: includes/class-customer.php:69
+msgid "Mr"
+msgstr "Herr"
+
+#. translators: %s: site name
+#: includes/class-emails.php:25
+#, php-format
+msgid "[%s] New B2B registration pending approval"
+msgstr "[%s] Neue B2B-Registrierung wartet auf Freigabe"
+
+#: includes/class-emails.php:27
+msgid "A new B2B customer has registered and is awaiting approval."
+msgstr "Ein neuer B2B-Kunde hat sich registriert und wartet auf Freigabe."
+
+#: includes/class-emails.php:29
+msgid "Review registration"
+msgstr "Registrierung prüfen"
+
+#. translators: %s: site name
+#: includes/class-emails.php:50
+#, php-format
+msgid "[%s] We received your registration"
+msgstr "[%s] Wir haben Ihre Registrierung erhalten"
+
+#. translators: %s: customer name
+#: includes/class-emails.php:54
+#: includes/class-emails.php:86
+#: includes/class-emails.php:112
+#, php-format
+msgid "Hello %s,"
+msgstr "Hallo %s,"
+
+#: includes/class-emails.php:59
+msgid "Thank you for registering. Your account is active and you can log in right away."
+msgstr "Vielen Dank für Ihre Registrierung. Ihr Konto ist aktiv und Sie können sich sofort anmelden."
+
+#: includes/class-emails.php:60
+#: includes/class-emails.php:88
+#: includes/views/form-login.php:43
+msgid "Log in"
+msgstr "Anmelden"
+
+#: includes/class-emails.php:62
+msgid "Thank you for registering. Your account is currently being reviewed by our team. We will email you as soon as it has been approved."
+msgstr "Vielen Dank für Ihre Registrierung. Ihr Konto wird derzeit von unserem Team geprüft. Wir benachrichtigen Sie per E-Mail, sobald es freigegeben wurde."
+
+#. translators: %s: site name
+#: includes/class-emails.php:84
+#, php-format
+msgid "[%s] Your account has been approved"
+msgstr "[%s] Ihr Konto wurde freigegeben"
+
+#: includes/class-emails.php:87
+msgid "Good news — your account has been approved. You can now log in to browse our catalogue and place orders."
+msgstr "Gute Nachrichten – Ihr Konto wurde freigegeben. Sie können sich jetzt anmelden, um unseren Katalog zu durchsuchen und Bestellungen aufzugeben."
+
+#. translators: %s: site name
+#: includes/class-emails.php:110
+#, php-format
+msgid "[%s] About your registration"
+msgstr "[%s] Zu Ihrer Registrierung"
+
+#: includes/class-emails.php:113
+msgid "Thank you for your interest. Unfortunately we were unable to approve your account at this time."
+msgstr "Vielen Dank für Ihr Interesse. Leider konnten wir Ihr Konto derzeit nicht freigeben."
+
+#: includes/class-emails.php:116
+msgid "Reason:"
+msgstr "Grund:"
+
+#: includes/class-emails.php:193
+msgid "Name"
+msgstr "Name"
+
+#: includes/class-emails.php:194
+msgid "Email"
+msgstr "E-Mail"
+
+#: includes/class-emails.php:195
+#: includes/views/form-register.php:95
+msgid "VAT ID"
+msgstr "USt-IdNr."
+
+#: includes/class-emails.php:196
+msgid "Address"
+msgstr "Adresse"
+
+#: includes/class-emails.php:198
+msgid "Phone"
+msgstr "Telefon"
+
+#: includes/class-gateway-invoice.php:45
+#: includes/class-gateway-invoice.php:84
+msgid "Pay by Invoice"
+msgstr "Kauf auf Rechnung"
+
+#: includes/class-gateway-invoice.php:46
+msgid "Let approved B2B customers place their order on account and pay against an invoice within your net payment terms. The order is held until you mark it paid."
+msgstr "Ermöglichen Sie freigegebenen B2B-Kunden, auf Rechnung zu bestellen und innerhalb Ihres Zahlungsziels zu bezahlen. Die Bestellung wird zurückgehalten, bis Sie sie als bezahlt markieren."
+
+#: includes/class-gateway-invoice.php:75
+msgid "Enable/Disable"
+msgstr "Aktivieren/Deaktivieren"
+
+#: includes/class-gateway-invoice.php:77
+msgid "Enable Pay by Invoice"
+msgstr "Kauf auf Rechnung aktivieren"
+
+#: includes/class-gateway-invoice.php:81
+msgid "Title"
+msgstr "Titel"
+
+#: includes/class-gateway-invoice.php:83
+msgid "Payment method title shown to the customer at checkout."
+msgstr "Titel der Zahlungsart, der dem Kunden an der Kasse angezeigt wird."
+
+#: includes/class-gateway-invoice.php:88
+msgid "Description"
+msgstr "Beschreibung"
+
+#: includes/class-gateway-invoice.php:90
+msgid "Payment method description shown to the customer at checkout."
+msgstr "Beschreibung der Zahlungsart, die dem Kunden an der Kasse angezeigt wird."
+
+#: includes/class-gateway-invoice.php:91
+msgid "Place your order on account and pay by invoice within our agreed payment terms."
+msgstr "Bestellen Sie auf Rechnung und bezahlen Sie innerhalb des vereinbarten Zahlungsziels."
+
+#: includes/class-gateway-invoice.php:95
+msgid "Instructions"
+msgstr "Anweisungen"
+
+#: includes/class-gateway-invoice.php:97
+msgid "Instructions added to the order-received page and order emails."
+msgstr "Anweisungen, die auf der Bestellbestätigungsseite und in Bestell-E-Mails angezeigt werden."
+
+#: includes/class-gateway-invoice.php:98
+msgid "We have received your order. An invoice will follow and is payable within the terms shown below."
+msgstr "Wir haben Ihre Bestellung erhalten. Eine Rechnung folgt und ist innerhalb der unten angegebenen Frist zahlbar."
+
+#: includes/class-gateway-invoice.php:102
+msgid "Order status"
+msgstr "Bestellstatus"
+
+#: includes/class-gateway-invoice.php:104
+msgid "Status applied when an invoice order is placed."
+msgstr "Status, der bei einer Bestellung auf Rechnung angewendet wird."
+
+#: includes/class-gateway-invoice.php:108
+msgid "On hold"
+msgstr "In Wartestellung"
+
+#: includes/class-gateway-invoice.php:109
+msgid "Processing"
+msgstr "In Bearbeitung"
+
+#: includes/class-gateway-invoice.php:110
+msgid "Pending payment"
+msgstr "Zahlung ausstehend"
+
+#: includes/class-gateway-invoice.php:114
+msgid "Payment terms (days)"
+msgstr "Zahlungsziel (Tage)"
+
+#: includes/class-gateway-invoice.php:116
+msgid "Net days until the invoice is due. The due date is stored on the order and shown to the customer. Use 0 for no due date."
+msgstr "Nettotage bis zur Fälligkeit der Rechnung. Das Fälligkeitsdatum wird bei der Bestellung gespeichert und dem Kunden angezeigt. Verwenden Sie 0 für kein Fälligkeitsdatum."
+
+#: includes/class-gateway-invoice.php:136
+msgid "Order placed on account — awaiting invoice payment."
+msgstr "Bestellung auf Rechnung aufgegeben – Zahlungseingang ausstehend."
+
+#: includes/class-gateway-invoice.php:202
+#: includes/class-gateway-invoice.php:230
+#: includes/class-gateway-invoice.php:237
+msgid "Payment due by:"
+msgstr "Zahlbar bis:"
+
+#: includes/class-install.php:122
+msgid "Account"
+msgstr "Konto"
+
+#: includes/class-license.php:72
+msgid "Operation successful."
+msgstr "Vorgang erfolgreich."
+
+#: includes/class-license.php:85
+msgid "Unknown error occurred."
+msgstr "Ein unbekannter Fehler ist aufgetreten."
+
+#: includes/class-license.php:104
+#: includes/class-license.php:182
+msgid "No license key found."
+msgstr "Kein Lizenzschlüssel gefunden."
+
+#: includes/class-license.php:148
+msgid "License key is required."
+msgstr "Der Lizenzschlüssel ist erforderlich."
+
+#: includes/class-license.php:320
+msgid "Woo B2B is not licensed."
+msgstr "Woo B2B ist nicht lizenziert."
+
+#: includes/class-license.php:321
+msgid "Activate your license to receive automatic updates and support."
+msgstr "Aktivieren Sie Ihre Lizenz, um automatische Updates und Support zu erhalten."
+
+#: includes/class-license.php:322
+msgid "Enter license key"
+msgstr "Lizenzschlüssel eingeben"
+
+#. translators: %s: company name
+#: includes/class-logs.php:177
+#, php-format
+msgid "New registration from %s"
+msgstr "Neue Registrierung von %s"
+
+#. translators: %s: status label
+#: includes/class-logs.php:196
+#, php-format
+msgid "Status changed to %s"
+msgstr "Status geändert zu %s"
+
+#: includes/class-pricing.php:72
+#: includes/class-pricing.php:107
+#: includes/class-pricing.php:123
+msgid "Log in to see prices"
+msgstr "Zum Anzeigen der Preise anmelden"
+
+#: includes/class-updater.php:185
+msgid "Turn a WooCommerce store into a B2B-only shop with a catalog lock, login/registration page, and admin approval workflow."
+msgstr "Verwandeln Sie einen WooCommerce-Shop in einen reinen B2B-Shop mit Katalogsperre, Anmelde-/Registrierungsseite und Admin-Freigabe-Workflow."
+
+#. translators: %s: releases URL
+#: includes/class-updater.php:207
+#, php-format
+msgid "See the <a href=\"%s\">GitHub releases</a> for the full changelog."
+msgstr "Den vollständigen Changelog finden Sie in den <a href=\"%s\">GitHub-Releases</a>."
+
+#: includes/views/admin-approvals.php:49
+msgid "Review registrations and approve customers before they can browse or order"
+msgstr "Prüfen Sie Registrierungen und geben Sie Kunden frei, bevor sie stöbern oder bestellen können"
+
+#: includes/views/admin-approvals.php:77
+msgid "Total customers"
+msgstr "Kunden gesamt"
+
+#: includes/views/admin-approvals.php:104
+msgid "Search by name or email…"
+msgstr "Nach Name oder E-Mail suchen …"
+
+#: includes/views/admin-approvals.php:108
+msgid "All countries"
+msgstr "Alle Länder"
+
+#: includes/views/admin-approvals.php:115
+msgid "Newest first"
+msgstr "Neueste zuerst"
+
+#: includes/views/admin-approvals.php:116
+msgid "Oldest first"
+msgstr "Älteste zuerst"
+
+#: includes/views/admin-approvals.php:118
+msgid "Filter"
+msgstr "Filtern"
+
+#: includes/views/admin-approvals.php:120
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: includes/views/admin-approvals.php:126
+msgid "selected"
+msgstr "ausgewählt"
+
+#: includes/views/admin-approvals.php:129
+msgid "Approve selected"
+msgstr "Ausgewählte freigeben"
+
+#: includes/views/admin-approvals.php:132
+msgid "Reject selected"
+msgstr "Ausgewählte ablehnen"
+
+#: includes/views/admin-approvals.php:142
+msgid "No customers match your search."
+msgstr "Keine Kunden entsprechen Ihrer Suche."
+
+#: includes/views/admin-approvals.php:144
+msgid "No customers found for this status."
+msgstr "Keine Kunden für diesen Status gefunden."
+
+#: includes/views/admin-approvals.php:153
+msgid "Select all"
+msgstr "Alle auswählen"
+
+#: includes/views/admin-approvals.php:155
+msgid "Customer"
+msgstr "Kunde"
+
+#: includes/views/admin-approvals.php:156
+msgid "Location"
+msgstr "Standort"
+
+#: includes/views/admin-approvals.php:157
+msgid "Registered"
+msgstr "Registriert"
+
+#: includes/views/admin-approvals.php:158
+#: includes/views/admin-settings.php:141
+#: includes/views/form-register.php:235
+msgid "Documents"
+msgstr "Dokumente"
+
+#: includes/views/admin-approvals.php:159
+msgid "Actions"
+msgstr "Aktionen"
+
+#: includes/views/admin-approvals.php:174
+msgid "Select customer"
+msgstr "Kunde auswählen"
+
+#: includes/views/admin-approvals.php:178
+msgid "VAT:"
+msgstr "USt-IdNr.:"
+
+#: includes/views/admin-settings.php:34
+msgid "Woo B2B Settings"
+msgstr "Woo-B2B-Einstellungen"
+
+#: includes/views/admin-settings.php:35
+msgid "Configure the catalog lock, registration, and notifications"
+msgstr "Katalogsperre, Registrierung und Benachrichtigungen konfigurieren"
+
+#: includes/views/admin-settings.php:45
+msgid "Access control"
+msgstr "Zugriffskontrolle"
+
+#: includes/views/admin-settings.php:49
+msgid "Access mode"
+msgstr "Zugriffsmodus"
+
+#: includes/views/admin-settings.php:51
+msgid "Lockdown — redirect guests to the account page"
+msgstr "Sperrmodus – Gäste zur Kontoseite weiterleiten"
+
+#: includes/views/admin-settings.php:52
+msgid "Show catalog, hide prices"
+msgstr "Katalog anzeigen, Preise verbergen"
+
+#: includes/views/admin-settings.php:54
+msgid "\"Lockdown\" redirects guests to the account page, where they log in or register. \"Show catalog, hide prices\" lets guests browse products but hides prices and disables purchasing until they log in. To fully disable the B2B lock, deactivate the plugin."
+msgstr "„Sperrmodus“ leitet Gäste zur Kontoseite weiter, wo sie sich anmelden oder registrieren. „Katalog anzeigen, Preise verbergen“ lässt Gäste Produkte durchsuchen, verbirgt jedoch die Preise und deaktiviert den Kauf, bis sie sich anmelden. Um die B2B-Sperre vollständig zu deaktivieren, deaktivieren Sie das Plugin."
+
+#: includes/views/admin-settings.php:58
+msgid "Account page"
+msgstr "Kontoseite"
+
+#: includes/views/admin-settings.php:60
+msgid "— Select —"
+msgstr "— Auswählen —"
+
+#: includes/views/admin-settings.php:67
+msgid "The page containing the [woo_b2b_auth] shortcode. Guests are redirected here."
+msgstr "Die Seite mit dem Shortcode [woo_b2b_auth]. Gäste werden hierher weitergeleitet."
+
+#: includes/views/admin-settings.php:71
+msgid "Always-public pages"
+msgstr "Immer öffentliche Seiten"
+
+#: includes/views/admin-settings.php:79
+msgid "Pages that stay visible without logging in (e.g. privacy policy, terms). Hold Ctrl/Cmd to select multiple."
+msgstr "Seiten, die ohne Anmeldung sichtbar bleiben (z. B. Datenschutzerklärung, AGB). Halten Sie Strg/Cmd gedrückt, um mehrere auszuwählen."
+
+#: includes/views/admin-settings.php:87
+msgid "Appearance"
+msgstr "Darstellung"
+
+#: includes/views/admin-settings.php:91
+msgid "Authentication page style"
+msgstr "Stil der Authentifizierungsseite"
+
+#: includes/views/admin-settings.php:93
+msgid "Inherit theme styles"
+msgstr "Theme-Stile übernehmen"
+
+#: includes/views/admin-settings.php:94
+msgid "Use plugin's own styles"
+msgstr "Eigene Stile des Plugins verwenden"
+
+#: includes/views/admin-settings.php:96
+msgid "\"Inherit theme styles\" adopts your active theme's colors, buttons and form fields on the [woo_b2b_auth] page (optimized for WoodMart). On other themes it falls back to the plugin's own design."
+msgstr "„Theme-Stile übernehmen“ verwendet die Farben, Schaltflächen und Formularfelder Ihres aktiven Themes auf der [woo_b2b_auth]-Seite (optimiert für WoodMart). Bei anderen Themes wird auf das eigene Design des Plugins zurückgegriffen."
+
+#: includes/views/admin-settings.php:104
+msgid "Registration"
+msgstr "Registrierung"
+
+#: includes/views/admin-settings.php:108
+msgid "Allowed countries"
+msgstr "Erlaubte Länder"
+
+#: includes/views/admin-settings.php:116
+msgid "Countries offered in the registration address dropdown."
+msgstr "Länder, die im Adress-Dropdown der Registrierung angeboten werden."
+
+#: includes/views/admin-settings.php:120
+msgid "Approval"
+msgstr "Freigabe"
+
+#: includes/views/admin-settings.php:127
+msgid "Auto-approve new registrations (skip manual review)"
+msgstr "Neue Registrierungen automatisch freigeben (manuelle Prüfung überspringen)"
+
+#: includes/views/admin-settings.php:132
+msgid "Minimum password length"
+msgstr "Minimale Passwortlänge"
+
+#: includes/views/admin-settings.php:145
+msgid "Require documents"
+msgstr "Dokumente erforderlich"
+
+#: includes/views/admin-settings.php:152
+msgid "Require at least one document on registration"
+msgstr "Bei der Registrierung mindestens ein Dokument verlangen"
+
+#: includes/views/admin-settings.php:157
+msgid "Allowed file types"
+msgstr "Erlaubte Dateitypen"
+
+#: includes/views/admin-settings.php:169
+msgid "Maximum file size (MB)"
+msgstr "Maximale Dateigröße (MB)"
+
+#: includes/views/admin-settings.php:178
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: includes/views/admin-settings.php:182
+msgid "Notification email"
+msgstr "Benachrichtigungs-E-Mail"
+
+#: includes/views/admin-settings.php:184
+msgid "Where new-registration notifications are sent."
+msgstr "Wohin Benachrichtigungen über neue Registrierungen gesendet werden."
+
+#: includes/views/admin-settings.php:191
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+#: includes/views/admin-settings.php:193
+msgid "Saved"
+msgstr "Gespeichert"
+
+#: includes/views/auth-page.php:28
+msgid "Wholesale portal"
+msgstr "Großhandelsportal"
+
+#: includes/views/auth-page.php:29
+msgid "Trade account access"
+msgstr "Zugang zum Geschäftskonto"
+
+#: includes/views/auth-page.php:30
+msgid "Sign in to your business account, or register to apply for wholesale access. New accounts are reviewed by our team before activation."
+msgstr "Melden Sie sich bei Ihrem Geschäftskonto an oder registrieren Sie sich, um Zugang zum Großhandel zu beantragen. Neue Konten werden vor der Aktivierung von unserem Team geprüft."
+
+#: includes/views/auth-page.php:33
+msgid "Wholesale pricing once approved"
+msgstr "Großhandelspreise nach Freigabe"
+
+#: includes/views/auth-page.php:34
+msgid "Fast checkout &amp; saved details"
+msgstr "Schnelle Kasse &amp; gespeicherte Angaben"
+
+#: includes/views/auth-page.php:35
+msgid "Full order history &amp; invoices"
+msgstr "Vollständige Bestellhistorie &amp; Rechnungen"
+
+#: includes/views/form-login.php:13
+msgid "I am already a customer"
+msgstr "Ich bin bereits Kunde"
+
+#: includes/views/form-login.php:14
+msgid "Log in with your email address and password."
+msgstr "Melden Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort an."
+
+#: includes/views/form-login.php:23
+msgid "Enter your email address …"
+msgstr "Geben Sie Ihre E-Mail-Adresse ein …"
+
+#: includes/views/form-login.php:27
+#: includes/views/form-register.php:113
+msgid "Password"
+msgstr "Passwort"
+
+#: includes/views/form-login.php:28
+msgid "Enter your password …"
+msgstr "Geben Sie Ihr Passwort ein …"
+
+#: includes/views/form-login.php:34
+msgid "Remember me"
+msgstr "Angemeldet bleiben"
+
+#: includes/views/form-login.php:39
+msgid "I forgot my password."
+msgstr "Ich habe mein Passwort vergessen."
+
+#: includes/views/form-register.php:38
+msgid "Select a country …"
+msgstr "Land auswählen …"
+
+#: includes/views/form-register.php:46
+msgid "I am a new customer"
+msgstr "Ich bin Neukunde"
+
+#: includes/views/form-register.php:47
+msgid "Register a business account. Your account will be reviewed by our team before it is activated."
+msgstr "Registrieren Sie ein Geschäftskonto. Ihr Konto wird vor der Aktivierung von unserem Team geprüft."
+
+#: includes/views/form-register.php:56
+msgid "Leave this field empty"
+msgstr "Lassen Sie dieses Feld leer"
+
+#: includes/views/form-register.php:62
+msgid "Your details"
+msgstr "Ihre Angaben"
+
+#: includes/views/form-register.php:66
+#: includes/views/form-register.php:173
+msgid "Salutation"
+msgstr "Anrede"
+
+#: includes/views/form-register.php:91
+#: includes/views/form-register.php:195
+msgid "Department"
+msgstr "Abteilung"
+
+#: includes/views/form-register.php:106
+msgid "Confirm email address"
+msgstr "E-Mail-Adresse bestätigen"
+
+#: includes/views/form-register.php:115
+#, php-format
+msgid "Must be at least %d characters long."
+msgstr "Muss mindestens %d Zeichen lang sein."
+
+#: includes/views/form-register.php:118
+msgid "Confirm password"
+msgstr "Passwort bestätigen"
+
+#: includes/views/form-register.php:125
+msgid "Your address"
+msgstr "Ihre Adresse"
+
+#: includes/views/form-register.php:144
+#: includes/views/form-register.php:217
+msgid "Address addition"
+msgstr "Adresszusatz"
+
+#: includes/views/form-register.php:155
+#: includes/views/form-register.php:228
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: includes/views/form-register.php:163
+msgid "Ship to a different address"
+msgstr "An eine abweichende Adresse liefern"
+
+#: includes/views/form-register.php:169
+msgid "Shipping address"
+msgstr "Lieferadresse"
+
+#. translators: 1: allowed file types, 2: max size in MB
+#: includes/views/form-register.php:240
+#, php-format
+msgid "Upload supporting documents (e.g. trade licence). Allowed: %1$s, up to %2$d MB each."
+msgstr "Laden Sie Nachweisdokumente hoch (z. B. Gewerbeschein). Erlaubt: %1$s, je bis zu %2$d MB."
+
+#. translators: 1: privacy policy link, 2: terms link
+#: includes/views/form-register.php:259
+#, php-format
+msgid "I have read the <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">privacy policy</a> and agree to the <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">terms and conditions</a>."
+msgstr "Ich habe die <a href=\"%1$s\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> gelesen und stimme den <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">Allgemeinen Geschäftsbedingungen</a> zu."
+
+#. translators: %s: privacy policy link
+#: includes/views/form-register.php:266
+#, php-format
+msgid "I have read and accept the <a href=\"%s\" target=\"_blank\" rel=\"noopener\">privacy policy</a>."
+msgstr "Ich habe die <a href=\"%s\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> gelesen und akzeptiere sie."
+
+#: includes/views/form-register.php:270
+msgid "I have read and accept the privacy policy and terms and conditions."
+msgstr "Ich habe die Datenschutzerklärung und die Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie."
+
+#: includes/views/form-register.php:278
+msgid "Fields marked with an asterisk (*) are required."
+msgstr "Mit einem Sternchen (*) markierte Felder sind erforderlich."
+
+#: includes/views/form-register.php:281
+msgid "Create account"
+msgstr "Konto erstellen"
+
+#: includes/views/license.php:56
+msgid "Manage your plugin license activation"
+msgstr "Verwalten Sie die Lizenzaktivierung Ihres Plugins"
+
+#: includes/views/license.php:82
+msgid "License Active"
+msgstr "Lizenz aktiv"
+
+#: includes/views/license.php:84
+msgid "Activation Required"
+msgstr "Aktivierung erforderlich"
+
+#: includes/views/license.php:87
+msgid "License Expired"
+msgstr "Lizenz abgelaufen"
+
+#: includes/views/license.php:88
+msgid "License Suspended"
+msgstr "Lizenz gesperrt"
+
+#: includes/views/license.php:89
+msgid "License Cancelled"
+msgstr "Lizenz storniert"
+
+#: includes/views/license.php:90
+msgid "License Paused"
+msgstr "Lizenz pausiert"
+
+#: includes/views/license.php:92
+msgid "License Invalid"
+msgstr "Lizenz ungültig"
+
+#: includes/views/license.php:94
+msgid "License Not Active"
+msgstr "Lizenz nicht aktiv"
+
+#: includes/views/license.php:106
+msgid "Your license is valid but not activated on this domain. Click \"Activate on This Domain\" below."
+msgstr "Ihre Lizenz ist gültig, aber auf dieser Domain nicht aktiviert. Klicken Sie unten auf „Auf dieser Domain aktivieren“."
+
+#: includes/views/license.php:111
+msgid "Your license has expired. Please renew to continue receiving updates and support."
+msgstr "Ihre Lizenz ist abgelaufen. Bitte erneuern Sie sie, um weiterhin Updates und Support zu erhalten."
+
+#: includes/views/license.php:112
+msgid "Your license has been suspended. Please contact support."
+msgstr "Ihre Lizenz wurde gesperrt. Bitte wenden Sie sich an den Support."
+
+#: includes/views/license.php:113
+msgid "Your license has been cancelled."
+msgstr "Ihre Lizenz wurde storniert."
+
+#: includes/views/license.php:114
+msgid "Your subscription is paused. Please resume it to continue."
+msgstr "Ihr Abonnement ist pausiert. Bitte setzen Sie es fort, um fortzufahren."
+
+#: includes/views/license.php:116
+msgid "Your license is no longer valid."
+msgstr "Ihre Lizenz ist nicht mehr gültig."
+
+#: includes/views/license.php:120
+msgid "Enter your license key to receive automatic updates and support."
+msgstr "Geben Sie Ihren Lizenzschlüssel ein, um automatische Updates und Support zu erhalten."
+
+#: includes/views/license.php:129
+msgid "Expires"
+msgstr "Läuft ab"
+
+#. translators: %d: days remaining
+#: includes/views/license.php:138
+#, php-format
+msgid "%d days left"
+msgstr "Noch %d Tage"
+
+#: includes/views/license.php:140
+msgid "Expired"
+msgstr "Abgelaufen"
+
+#: includes/views/license.php:145
+msgid "Lifetime"
+msgstr "Lebenslang"
+
+#: includes/views/license.php:152
+msgid "Activations"
+msgstr "Aktivierungen"
+
+#. translators: 1: used count, 2: limit
+#: includes/views/license.php:157
+#, php-format
+msgid "%1$d of %2$d used"
+msgstr "%1$d von %2$d verwendet"
+
+#: includes/views/license.php:168
+msgid "Last Verified"
+msgstr "Zuletzt verifiziert"
+
+#: includes/views/license.php:170
+msgid "ago"
+msgstr "her"
+
+#: includes/views/license.php:187
+msgid "License Management"
+msgstr "Lizenzverwaltung"
+
+#: includes/views/license.php:189
+msgid "Domain Activation"
+msgstr "Domain-Aktivierung"
+
+#: includes/views/license.php:191
+msgid "Activate License"
+msgstr "Lizenz aktivieren"
+
+#: includes/views/license.php:199
+#: includes/views/license.php:213
+#: includes/views/license.php:237
+msgid "Current License Key"
+msgstr "Aktueller Lizenzschlüssel"
+
+#: includes/views/license.php:204
+msgid "Verify License"
+msgstr "Lizenz verifizieren"
+
+#: includes/views/license.php:207
+msgid "Deactivate License"
+msgstr "Lizenz deaktivieren"
+
+#. translators: %s: domain
+#: includes/views/license.php:221
+#, php-format
+msgid "This domain (%s) is not yet activated. Click the button below to activate."
+msgstr "Diese Domain (%s) ist noch nicht aktiviert. Klicken Sie auf die Schaltfläche unten, um sie zu aktivieren."
+
+#: includes/views/license.php:228
+msgid "Activate on This Domain"
+msgstr "Auf dieser Domain aktivieren"
+
+#: includes/views/license.php:231
+msgid "Use Different License"
+msgstr "Andere Lizenz verwenden"
+
+#: includes/views/license.php:242
+msgid "Re-check License"
+msgstr "Lizenz erneut prüfen"
+
+#: includes/views/license.php:245
+msgid "Remove License"
+msgstr "Lizenz entfernen"
+
+#: includes/views/license.php:253
+msgid "License Key"
+msgstr "Lizenzschlüssel"
+
+#: includes/views/license.php:260
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: includes/views/license.php:263
+msgid "Enter the license key you received after purchase."
+msgstr "Geben Sie den Lizenzschlüssel ein, den Sie nach dem Kauf erhalten haben."
+
+#. translators: %s: purchase link
+#: includes/views/license.php:274
+#, php-format
+msgid "Don't have a license? %s"
+msgstr "Sie haben keine Lizenz? %s"
+
+#: includes/views/license.php:275
+msgid "Purchase one here"
+msgstr "Hier erwerben"
+
+#. translators: %s: dashboard link
+#: includes/views/license.php:284
+#, php-format
+msgid "Manage your licenses and domain activations: %s"
+msgstr "Verwalten Sie Ihre Lizenzen und Domain-Aktivierungen: %s"
+
+#: includes/views/license.php:285
+msgid "License Dashboard"
+msgstr "Lizenz-Dashboard"
+
+#. translators: %s: support email link
+#: includes/views/license.php:294
+#, php-format
+msgid "Need help? Contact support: %s"
+msgstr "Brauchen Sie Hilfe? Kontaktieren Sie den Support: %s"
+
+#: includes/views/license.php:311
+msgid "Plugin Updates"
+msgstr "Plugin-Updates"
+
+#: includes/views/license.php:317
+msgid "Installed Version:"
+msgstr "Installierte Version:"
+
+#: includes/views/license.php:322
+msgid "Latest Version:"
+msgstr "Neueste Version:"
+
+#: includes/views/license.php:326
+msgid "Update Available"
+msgstr "Update verfügbar"
+
+#: includes/views/license.php:335
+msgid "Check for Updates"
+msgstr "Nach Updates suchen"
+
+#: includes/views/license.php:340
+#, php-format
+msgid "Update to %s"
+msgstr "Auf %s aktualisieren"
+
+#. translators: %s: GitHub releases link
+#: includes/views/license.php:350
+#, php-format
+msgid "Updates are fetched from %s"
+msgstr "Updates werden von %s bezogen"
+
+#: woo-b2b.php:164
+msgid "Woo B2B requires WooCommerce to be installed and active."
+msgstr "Woo B2B erfordert, dass WooCommerce installiert und aktiv ist."
