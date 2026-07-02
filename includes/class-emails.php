@@ -188,8 +188,10 @@ class WB2B_Emails {
             return '';
         }
 
+        $copy = WB2B_Auth::get_copy();
+
         $rows = [
-            __('Company', 'woo-b2b')    => $profile['company'],
+            $copy['company_label']      => $profile['company'],
             __('Name', 'woo-b2b')       => trim($profile['first_name'] . ' ' . $profile['last_name']),
             __('Email', 'woo-b2b')      => $profile['email'],
             __('VAT ID', 'woo-b2b')     => $profile['vat_id'],

@@ -4,7 +4,7 @@ Tags: woocommerce, b2b, wholesale, login, registration, approval, catalog visibi
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ They are stored as private attachments and linked from the customer row on the a
 The interface ships in English and German (`de_DE`). All strings are translation-ready (text domain `woo-b2b`); a `woo-b2b.pot` template is included for adding further languages.
 
 == Changelog ==
+
+= 1.4.3 =
+* New **Store audience** setting (Settings → Appearance): choose **Wholesale (businesses)** or **Education (institutions)** to switch the login and registration wording. The Education preset relabels the portal, hero, benefits, registration intro, the "Company" field (→ "Institution"), and the document hint for an educational audience; the registration summary email follows the same wording. German translations included.
 
 = 1.4.2 =
 * Fixed: the bundled translations (including the German `de_DE` login/registration strings) were missing from the release package, so the storefront login card showed English even when the site language was German. The `languages/` folder is now included in the release build.
